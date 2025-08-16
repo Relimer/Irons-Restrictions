@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FEF",
+    "FFF"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "F": {
+      "item": "irons_restrictions:evocation_knowledge_fragment"
+    }
+  },
+  "result": {
+    "id": "irons_restrictions:evocation_manuscript",
+    "count": 1
+  }
+}

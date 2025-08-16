@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FEF",
+    "FFF"
+  ],
+  "key": {
+    "E": {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    "F": {
+      "item": "irons_restrictions:blood_knowledge_fragment"
+    }
+  },
+  "result": {
+    "id": "irons_restrictions:blood_manuscript",
+    "count": 1
+  }
+}

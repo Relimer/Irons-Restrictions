@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FEF",
+    "FFF"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:blaze_rod"
+    },
+    "F": {
+      "item": "irons_restrictions:fire_knowledge_fragment"
+    }
+  },
+  "result": {
+    "id": "irons_restrictions:fire_manuscript",
+    "count": 1
+  }
+}

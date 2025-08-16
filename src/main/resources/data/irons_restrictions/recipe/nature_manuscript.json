@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FEF",
+    "FFF"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:poisonous_potato"
+    },
+    "F": {
+      "item": "irons_restrictions:nature_knowledge_fragment"
+    }
+  },
+  "result": {
+    "id": "irons_restrictions:nature_manuscript",
+    "count": 1
+  }
+}
