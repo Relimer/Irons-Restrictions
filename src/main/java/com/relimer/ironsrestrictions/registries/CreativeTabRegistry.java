@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -30,6 +29,13 @@ public class CreativeTabRegistry {
     public static void fillCreativeTabs(final BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() == RESTRICTIONS_TAB.get()) {
             event.accept(ItemRegistry.FIRE_PAGE.get());
+            event.accept(ItemRegistry.NATURE_PAGE.get());
+            event.accept(ItemRegistry.EVOCATION_PAGE.get());
+            event.accept(ItemRegistry.ENDER_PAGE.get());
+            event.accept(ItemRegistry.ICE_PAGE.get());
+            event.accept(ItemRegistry.HOLY_PAGE.get());
+            event.accept(ItemRegistry.BLOOD_PAGE.get());
+            event.accept(ItemRegistry.LIGHTNING_PAGE.get());
         }
     }
 }

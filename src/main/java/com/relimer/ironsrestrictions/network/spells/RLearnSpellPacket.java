@@ -44,7 +44,15 @@ public class RLearnSpellPacket implements CustomPacketPayload {
                 ItemStack itemStack = serverPlayer.getItemInHand(byteToHand(packet.hand));
                 AbstractSpell spell = SpellRegistry.getSpell(packet.spell);
                 var data = MagicData.getPlayerMagicData(serverPlayer).getSyncedData();
-                if (spell != SpellRegistry.none() && !data.isSpellLearned(spell) && itemStack.is(ItemRegistry.FIRE_PAGE.get()) && itemStack.getCount() > 0) {
+                var page = itemStack.is(ItemRegistry.FIRE_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.NATURE_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.EVOCATION_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.ENDER_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.ICE_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.HOLY_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.BLOOD_PAGE.get()) ||
+                        itemStack.is(ItemRegistry.LIGHTNING_PAGE.get());
+                if (spell != SpellRegistry.none() && !data.isSpellLearned(spell) && page && itemStack.getCount() > 0) {
                     data.learnSpell(spell);
                     if (!serverPlayer.getAbilities().instabuild) {
                         itemStack.shrink(1);

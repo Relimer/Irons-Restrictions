@@ -1,6 +1,20 @@
 {
   "item.irons_restrictions.fire_manuscript": "Fire Manuscript",
   "item.irons_restrictions.fire_manuscript_desc": "Use to learn Fire spells",
+  "item.irons_restrictions.nature_manuscript": "Nature Manuscript",
+  "item.irons_restrictions.nature_manuscript_desc": "Use to learn Nature spells",
+  "item.irons_restrictions.evocation_manuscript": "Evocation Manuscript",
+  "item.irons_restrictions.evocation_manuscript_desc": "Use to learn Evocation spells",
+  "item.irons_restrictions.ender_manuscript": "Ender Manuscript",
+  "item.irons_restrictions.ender_manuscript_desc": "Use to learn Ender spells",
+  "item.irons_restrictions.ice_manuscript": "Ice Manuscript",
+  "item.irons_restrictions.ice_manuscript_desc": "Use to learn Ice spells",
+  "item.irons_restrictions.holy_manuscript": "Holy Manuscript",
+  "item.irons_restrictions.holy_manuscript_desc": "Use to learn Holy spells",
+  "item.irons_restrictions.blood_manuscript": "Blood Manuscript",
+  "item.irons_restrictions.blood_manuscript_desc": "Use to learn Blood spells",
+  "item.irons_restrictions.lightning_manuscript": "Lightning Manuscript",
+  "item.irons_restrictions.lightning_manuscript_desc": "Use to learn Lightning spells",
 
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }
