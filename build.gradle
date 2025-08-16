@@ -18,6 +18,21 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+    maven {
+        name = "Iron's Maven - Release"
+        url = "https://code.redspace.io/releases"
+    }
+    maven { url = "https://maven.enginehub.org/repo/" }
+    maven {
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+    maven { url = "https://maven.theillusivec4.top" }
+    maven { url = "https://cursemaven.com" }
+    maven { url = "https://maven.blamejared.com" }
+    maven { url = "https://maven.kosmx.dev/" }
 }
 
 base {
@@ -94,7 +109,28 @@ dependencies {
     // You can however also use the vanilla plugin (net.neoforged.gradle.vanilla) to use a version of Minecraft without the neoforge loader.
     // And its provides the option to then use net.minecraft as the group, and one of; client, server or joined as the module name, plus the game version as version.
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
+    // FORGE ******************************************************************************************************
     implementation "net.neoforged:neoforge:${neo_version}"
+
+    // IRONS SPELLS ***********************************************************************************************
+    implementation "io.redspace:irons_spellbooks:${irons_spells_version}"
+
+    // GECKOLIB ***************************************************************************************************
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    // PLAYER ANIMATOR ********************************************************************************************
+    //compileOnly "dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_version}"
+    implementation "dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_version}"
+
+    // CURIOS *****************************************************************************************************
+    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
+
+    // JEI ********************************************************************************************************
+    compileOnly "mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+
+
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

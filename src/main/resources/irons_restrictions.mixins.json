@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.relimer.ironsrestrictions.mixin",
+  "refmap": "irons_spellbooks.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SchoolRegistryMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

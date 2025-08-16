@@ -1,4 +1,4 @@
-package com.relimer.irons_restrictions;
+package com.relimer.ironsrestrictions;
 
 import java.util.List;
 
