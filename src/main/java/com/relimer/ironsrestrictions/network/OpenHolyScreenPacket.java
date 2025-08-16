@@ -1,7 +1,7 @@
 package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
-import com.relimer.ironsrestrictions.player.ClientSpellCastHelperMixin;
+import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +29,7 @@ public class OpenHolyScreenPacket implements CustomPacketPayload {
 
     public static void handle(OpenHolyScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            ClientSpellCastHelperMixin.openHolyResearchScreen(packet.hand);
+            RClientSpellCastHelper.openHolyResearchScreen(packet.hand);
         });
     }
 

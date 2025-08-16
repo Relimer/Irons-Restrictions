@@ -1,12 +1,10 @@
 {
   "required": true,
-  "package": "com.relimer.ironsrestrictions.mixin",
-  "refmap": "irons_spellbooks.refmap.json",
+  "package": "io.redspace.ironsspellbooks.ironsrestrictionsmixin",
+  "refmap": "irons_restrictions.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "SchoolRegistryMixin"
-  ],
-  "client": [
+    "EldritchResearchScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,8 +1,7 @@
 package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
-import com.relimer.ironsrestrictions.player.ClientSpellCastHelperMixin;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
+import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -30,7 +29,7 @@ public class OpenFireScreenPacket implements CustomPacketPayload {
 
     public static void handle(OpenFireScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            ClientSpellCastHelperMixin.openFireResearchScreen(packet.hand);
+            RClientSpellCastHelper.openFireResearchScreen(packet.hand);
         });
     }
 

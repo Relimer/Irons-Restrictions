@@ -30,6 +30,7 @@ public class ItemRegistry {
 
 
 
+
     public static Collection<DeferredHolder<Item, ? extends Item>> getIronsRestrictionsItems() {
         return ITEMS.getEntries();
     }
