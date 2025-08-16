@@ -28,8 +28,14 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> BLOOD_PAGE = ITEMS.register("blood_manuscript", () -> new BloodManuscript(ItemPropertiesHelper.material().rarity(Rarity.EPIC)));
     public static final DeferredHolder<Item, Item> LIGHTNING_PAGE = ITEMS.register("lightning_manuscript", () -> new LightningManuscript(ItemPropertiesHelper.material().rarity(Rarity.EPIC)));
 
-
-
+    public static final DeferredHolder<Item, Item> FIRE_KNOWLEDGE_FRAGMENT = ITEMS.register("fire_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> NATURE_KNOWLEDGE_FRAGMENT = ITEMS.register("nature_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> EVOCATION_KNOWLEDGE_FRAGMENT = ITEMS.register("evocation_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> ENDER_KNOWLEDGE_FRAGMENT = ITEMS.register("ender_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> ICE_KNOWLEDGE_FRAGMENT = ITEMS.register("ice_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> HOLY_KNOWLEDGE_FRAGMENT = ITEMS.register("holy_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> BLOOD_KNOWLEDGE_FRAGMENT = ITEMS.register("blood_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
+    public static final DeferredHolder<Item, Item> LIGHTNING_KNOWLEDGE_FRAGMENT = ITEMS.register("lightning_knowledge_fragment", () -> new Item(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON)));
 
     public static Collection<DeferredHolder<Item, ? extends Item>> getIronsRestrictionsItems() {
         return ITEMS.getEntries();

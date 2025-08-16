@@ -16,5 +16,14 @@
   "item.irons_restrictions.lightning_manuscript": "Lightning Manuscript",
   "item.irons_restrictions.lightning_manuscript_desc": "Use to learn Lightning spells",
 
+  "item.irons_restrictions.fire_knowledge_fragment": "Fire Knowledge Fragment",
+  "item.irons_restrictions.nature_knowledge_fragment": "Nature Knowledge Fragment",
+  "item.irons_restrictions.evocation_knowledge_fragment": "Evocation Knowledge Fragment",
+  "item.irons_restrictions.ender_knowledge_fragment": "Ender Knowledge Fragment",
+  "item.irons_restrictions.ice_knowledge_fragment": "Ice Knowledge Fragment",
+  "item.irons_restrictions.holy_knowledge_fragment": "Holy Knowledge Fragment",
+  "item.irons_restrictions.blood_knowledge_fragment": "Blood Knowledge Fragment",
+  "item.irons_restrictions.lightning_knowledge_fragment": "Lightning Knowledge Fragment",
+
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }

@@ -29,13 +29,21 @@ public class CreativeTabRegistry {
     public static void fillCreativeTabs(final BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() == RESTRICTIONS_TAB.get()) {
             event.accept(ItemRegistry.FIRE_PAGE.get());
+            event.accept(ItemRegistry.FIRE_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.NATURE_PAGE.get());
+            event.accept(ItemRegistry.NATURE_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.EVOCATION_PAGE.get());
+            event.accept(ItemRegistry.EVOCATION_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.ENDER_PAGE.get());
+            event.accept(ItemRegistry.ENDER_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.ICE_PAGE.get());
+            event.accept(ItemRegistry.ICE_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.HOLY_PAGE.get());
+            event.accept(ItemRegistry.HOLY_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.BLOOD_PAGE.get());
+            event.accept(ItemRegistry.BLOOD_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.LIGHTNING_PAGE.get());
+            event.accept(ItemRegistry.LIGHTNING_KNOWLEDGE_FRAGMENT.get());
         }
     }
 }
