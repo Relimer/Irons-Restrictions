@@ -1,5 +1,6 @@
 package com.relimer.ironsrestrictions.registries;
 
+import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;

@@ -2,8 +2,9 @@
   "required": true,
   "package": "io.redspace.ironsspellbooks.ironsrestrictionsmixin",
   "refmap": "irons_restrictions.refmap.json",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractSpellMixin",
     "EldritchResearchScreenMixin"
   ],
   "injectors": {
