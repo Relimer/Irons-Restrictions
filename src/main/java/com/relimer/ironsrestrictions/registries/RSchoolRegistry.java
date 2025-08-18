@@ -1,6 +1,5 @@
 package com.relimer.ironsrestrictions.registries;
 
-import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
@@ -11,7 +10,6 @@ import io.redspace.ironsspellbooks.util.ModTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

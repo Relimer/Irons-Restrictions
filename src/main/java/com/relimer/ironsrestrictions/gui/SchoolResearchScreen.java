@@ -3,11 +3,10 @@ package com.relimer.ironsrestrictions.gui;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
-import com.relimer.ironsrestrictions.registries.ItemRegistry;
-import com.relimer.ironsrestrictions.registries.RSchoolRegistry;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
@@ -29,6 +28,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class IceResearchScreen extends Screen {
+public class SchoolResearchScreen extends Screen {
 
     private static final ResourceLocation WINDOW_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/window.png");
     private static final ResourceLocation FRAME_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/spell_frame.png");
@@ -58,14 +58,18 @@ public class IceResearchScreen extends Screen {
 
     int leftPos, topPos;
     InteractionHand activeHand;
+    SchoolType school;
+    Item consumableItem;
 
-    public IceResearchScreen(Component pTitle, InteractionHand activeHand) {
+    public SchoolResearchScreen(Component pTitle, InteractionHand activeHand, SchoolType schoolType, Item item) {
         super(pTitle);
         this.activeHand = activeHand;
+        school = schoolType;
+        consumableItem = item;
     }
 
     List<AbstractSpell> learnableSpells;
-    List<IceResearchScreen.SpellNode> nodes;
+    List<SchoolResearchScreen.SpellNode> nodes;
     SyncedSpellData playerData;
     Vec2 maxViewportOffset;
     Vec2 viewportOffset;
@@ -78,7 +82,7 @@ public class IceResearchScreen extends Screen {
 
     protected void init() {
 
-        learnableSpells = SpellRegistry.getEnabledSpells().stream().filter(spell -> spell.getSchoolType().equals(RSchoolRegistry.ICE.get())).toList();
+        learnableSpells = SpellRegistry.getEnabledSpells().stream().filter(spell -> spell.getSchoolType().equals(school)).toList();
         if (this.minecraft != null) {
             playerData = ClientMagicData.getSyncedSpellData(minecraft.player);
         }
@@ -103,7 +107,7 @@ public class IceResearchScreen extends Screen {
             a += f;
             int x = leftPos + WINDOW_WIDTH / 2 - 8 + (int) (r * Mth.cos(a));
             int y = topPos + WINDOW_HEIGHT / 2 - 8 + (int) (r * Mth.sin(a));
-            nodes.add(new IceResearchScreen.SpellNode(learnableSpells.get(i), x, y));
+            nodes.add(new SchoolResearchScreen.SpellNode(learnableSpells.get(i), x, y));
             circumference += r * f * 1.1f;
         }
         float maxDistX = 0;
@@ -167,19 +171,6 @@ public class IceResearchScreen extends Screen {
         if (tooltip != null) {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
         }
-//        String mousePos = String.format("(%s\t%s)", mouseX, mouseY);
-//        String boundX = String.format("%s + %s - %s = %s", mouseX, (int) viewportOffset.x, leftPos, mouseX + (int) viewportOffset.x - leftPos);
-//        String boundY = String.format("%s + %s - %s = %s", mouseY, (int) viewportOffset.y, topPos, mouseY + (int) viewportOffset.y - topPos);
-//        String pX = String.format("%s", (mouseX + (int) viewportOffset.x - leftPos) / (float)WINDOW_WIDTH);
-//        String pY = String.format("%s", (mouseY + (int) viewportOffset.y - topPos) / (float)WINDOW_HEIGHT);
-//        String sx = String.format("x:%s", ( Math.clamp(Mth.clamp(mouseX + viewportOffset.x - leftPos, 0, WINDOW_WIDTH)/20f,0,1)) / (float)WINDOW_WIDTH);
-//        guiGraphics.drawString(font, mousePos, 0, 0, 0xFFFFFF);
-//        guiGraphics.drawString(font, boundX, 0, 10, 0xFFFFFF);
-//        guiGraphics.drawString(font, boundY, 0, 20, 0xFFFFFF);
-//        guiGraphics.drawString(font, pX, 0, 30, 0xFFFFFF);
-//        guiGraphics.drawString(font, pY, 0, 40, 0xFFFFFF);
-//        guiGraphics.drawString(font, sx, 0, 50, 0xFFFFFF);
-
     }
 
     private void renderProgressOverlay(GuiGraphics gui, int x, int y, float progress) {
@@ -188,7 +179,7 @@ public class IceResearchScreen extends Screen {
         gui.fill(x, y, x + Mth.ceil(16.0F * progress), y + 16, FastColor.ARGB32.color(127, 244, 65, 255));
     }
 
-    private void drawNode(GuiGraphics guiGraphics, IceResearchScreen.SpellNode node, LocalPlayer player, boolean drawProgress) {
+    private void drawNode(GuiGraphics guiGraphics, SchoolResearchScreen.SpellNode node, LocalPlayer player, boolean drawProgress) {
         drawWithClipping(node.spell.getSpellIconResource(),
                 guiGraphics,
                 node.x,
@@ -315,9 +306,9 @@ public class IceResearchScreen extends Screen {
         float f = Minecraft.getInstance().player != null ? Minecraft.getInstance().player.tickCount * .02f : 0f;
         float color = (Mth.sin(f) + 1) * .25f + .15f;
         var definitelynothowabuilderworks = RenderHelper.quadBuilder()
-                .vertex(left, top + IceResearchScreen.WINDOW_INSIDE_HEIGHT)
-                .vertex(left + IceResearchScreen.WINDOW_INSIDE_WIDTH, top + IceResearchScreen.WINDOW_INSIDE_HEIGHT)
-                .vertex(left + IceResearchScreen.WINDOW_INSIDE_WIDTH, top)
+                .vertex(left, top + SchoolResearchScreen.WINDOW_INSIDE_HEIGHT)
+                .vertex(left + SchoolResearchScreen.WINDOW_INSIDE_WIDTH, top + SchoolResearchScreen.WINDOW_INSIDE_HEIGHT)
+                .vertex(left + SchoolResearchScreen.WINDOW_INSIDE_WIDTH, top)
                 .vertex(left, top)
                 .color(0, 0, 0, color);
         definitelynothowabuilderworks.build(guiGraphics, RenderType.endPortal());
@@ -338,7 +329,7 @@ public class IceResearchScreen extends Screen {
         int mouseX = (int) pMouseX;
         int mouseY = (int) pMouseY;
         //Only allow initiating the learn process if they are holding a manuscript
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getItemInHand(activeHand).is(ItemRegistry.ICE_PAGE.get())) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getItemInHand(activeHand).is(consumableItem)) {
             for (int i = 0; i < nodes.size(); i++) {
                 if (isHoveringNode(nodes.get(i), mouseX, mouseY)) {
                     heldSpellIndex = i;
@@ -356,7 +347,7 @@ public class IceResearchScreen extends Screen {
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
-    public boolean isHoveringNode(IceResearchScreen.SpellNode node, int mouseX, int mouseY) {
+    public boolean isHoveringNode(SchoolResearchScreen.SpellNode node, int mouseX, int mouseY) {
         //TODO: make outside screen unclickable
         return isHovering(node.x - 2 + (int) viewportOffset.x, node.y - 2 + (int) viewportOffset.y, 16 + 4, 16 + 4, mouseX, mouseY);
     }
@@ -400,6 +391,6 @@ public class IceResearchScreen extends Screen {
     record SpellNode(AbstractSpell spell, int x, int y) {
     }
 
-    record NodeConnection(IceResearchScreen.SpellNode node1, IceResearchScreen.SpellNode node2) {
+    record NodeConnection(SchoolResearchScreen.SpellNode node1, SchoolResearchScreen.SpellNode node2) {
     }
 }

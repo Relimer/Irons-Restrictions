@@ -4,15 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.relimer.ironsrestrictions.registries.LootConditionRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.Cod;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
-import net.neoforged.neoforge.common.loot.LootModifier;
 
 import java.util.Set;
 
@@ -38,7 +34,6 @@ public class ChestLootCondition implements LootItemCondition {
 
     @Override
     public Set<LootContextParam<?>> getReferencedContextParams() {
-        // No specific context parameters are required
         return Set.of();
     }
 }

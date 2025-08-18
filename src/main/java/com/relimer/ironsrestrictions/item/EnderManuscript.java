@@ -1,7 +1,6 @@
 package com.relimer.ironsrestrictions.item;
 
 import com.relimer.ironsrestrictions.network.OpenEnderScreenPacket;
-import com.relimer.ironsrestrictions.network.OpenFireScreenPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

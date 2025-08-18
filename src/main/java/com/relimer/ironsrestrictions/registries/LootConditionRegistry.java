@@ -6,7 +6,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryBuilder;
 
 import java.util.function.Supplier;
 
