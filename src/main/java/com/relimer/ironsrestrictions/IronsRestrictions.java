@@ -1,5 +1,6 @@
 package com.relimer.ironsrestrictions;
 import com.relimer.ironsrestrictions.registries.*;
+import com.relimer.ironsrestrictions.setup.CommonCompatSetup;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -27,8 +28,10 @@ public class IronsRestrictions {
     public IronsRestrictions(IEventBus modEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
 
-        ItemRegistry.register(modEventBus);;
+        CommonCompatSetup.registerItems();
+        ItemRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
+        CommonCompatSetup.registerSchools();
         RSchoolRegistry.SCHOOLS.register(modEventBus);
         LootModifierRegistry.register(modEventBus);
         LootConditionRegistry.register(modEventBus);
@@ -39,8 +42,6 @@ public class IronsRestrictions {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -48,12 +49,6 @@ public class IronsRestrictions {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
-    }
-    public static ResourceLocation id(@NotNull String path) {
-        return ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, path);
     }
 }

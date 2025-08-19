@@ -19,7 +19,6 @@ import static io.redspace.ironsspellbooks.api.registry.SchoolRegistry.*;
 public class RSchoolRegistry {
     public static final DeferredRegister<SchoolType> SCHOOLS = DeferredRegister.create(SchoolRegistry.SCHOOL_REGISTRY_KEY, IronsRestrictions.MODID);
 
-
     public static final Supplier<SchoolType> FIRE = registerSchool(new SchoolType(
             FIRE_RESOURCE,
             ModTags.FIRE_FOCUS,
@@ -109,7 +108,7 @@ public class RSchoolRegistry {
             false
     ));
 
-    private static Supplier<SchoolType> registerSchool(SchoolType schoolType) {
+    public static Supplier<SchoolType> registerSchool(SchoolType schoolType) {
         return SCHOOLS.register(schoolType.getId().getPath(), () -> schoolType);
     }
 }

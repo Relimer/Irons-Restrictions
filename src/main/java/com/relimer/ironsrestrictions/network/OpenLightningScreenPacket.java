@@ -2,6 +2,8 @@ package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
+import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.registries.RSchoolRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +31,9 @@ public class OpenLightningScreenPacket implements CustomPacketPayload {
 
     public static void handle(OpenLightningScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            RClientSpellCastHelper.openLightningResearchScreen(packet.hand);
+            RClientSpellCastHelper.openSchoolResearchScreen(packet.hand, RSchoolRegistry.LIGHTNING.get(), ItemRegistry.LIGHTNING_PAGE.get(),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/lightning_window.png"),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/lightning_frame.png"));
         });
     }
 

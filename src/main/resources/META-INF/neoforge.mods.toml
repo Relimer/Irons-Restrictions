@@ -86,8 +86,19 @@ config="${mod_id}.irons_spellbooks.mixins.json"
     ordering="NONE"
     side="BOTH"
 
-# Features are specific properties of the game environment, that you may want to declare you require. This example declares
-# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
-# stop your mod loading on the server for example.
-#[features.${mod_id}]
-#openGLVersion="[3.2,)"
+
+
+[[dependencies.${mod_id}]]
+    modId="irons_spellbooks"
+    type="required"
+    versionRange="1.21.1-3.14.0"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="alshanex_familiars"
+    type="optional"
+    versionRange="1.21.1_v2.0_HotFix"
+    ordering="NONE"
+    side="BOTH"
+

@@ -25,5 +25,10 @@
   "item.irons_restrictions.blood_knowledge_fragment": "Blood Knowledge Fragment",
   "item.irons_restrictions.lightning_knowledge_fragment": "Lightning Knowledge Fragment",
 
+
+  "item.irons_restrictions.sound_manuscript": "Sound Manuscript",
+  "item.irons_restrictions.sound_manuscript_desc": "Use to learn Sound spells",
+  "item.irons_restrictions.sound_knowledge_fragment": "Sound Knowledge Fragment",
+
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }

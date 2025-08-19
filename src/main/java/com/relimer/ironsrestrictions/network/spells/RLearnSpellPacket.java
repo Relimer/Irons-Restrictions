@@ -2,6 +2,7 @@ package com.relimer.ironsrestrictions.network.spells;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.setup.CommonCompatSetup;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -50,7 +51,8 @@ public class RLearnSpellPacket implements CustomPacketPayload {
                         itemStack.is(ItemRegistry.ICE_PAGE.get()) ||
                         itemStack.is(ItemRegistry.HOLY_PAGE.get()) ||
                         itemStack.is(ItemRegistry.BLOOD_PAGE.get()) ||
-                        itemStack.is(ItemRegistry.LIGHTNING_PAGE.get());
+                        itemStack.is(ItemRegistry.LIGHTNING_PAGE.get()) ||
+                        CommonCompatSetup.isPage(itemStack);
                 if (spell != SpellRegistry.none() && !data.isSpellLearned(spell) && page && itemStack.getCount() > 0) {
                     data.learnSpell(spell);
                     if (!serverPlayer.getAbilities().instabuild) {

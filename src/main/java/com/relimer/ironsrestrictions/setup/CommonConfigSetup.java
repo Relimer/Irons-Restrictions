@@ -30,6 +30,7 @@ public class CommonConfigSetup {
                     SchoolRegistry.BLOOD.get(), RSchoolRegistry.BLOOD.get(),
                     SchoolRegistry.LIGHTNING.get(), RSchoolRegistry.LIGHTNING.get()
             );
+            schoolRemap = CommonCompatSetup.putSchoolRemap(schoolRemap);
             AbstractSpellMixinHelper.setSchoolRemap(schoolRemap);
         });
     }

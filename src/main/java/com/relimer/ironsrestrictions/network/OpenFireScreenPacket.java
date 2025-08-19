@@ -2,6 +2,9 @@ package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
+import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.registries.RSchoolRegistry;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +32,9 @@ public class OpenFireScreenPacket implements CustomPacketPayload {
 
     public static void handle(OpenFireScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            RClientSpellCastHelper.openFireResearchScreen(packet.hand);
+            RClientSpellCastHelper.openSchoolResearchScreen(packet.hand, RSchoolRegistry.FIRE.get(), ItemRegistry.FIRE_PAGE.get(),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/fire_window.png"),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/fire_frame.png"));
         });
     }
 

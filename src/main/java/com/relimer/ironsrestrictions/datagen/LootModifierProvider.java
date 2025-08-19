@@ -4,6 +4,7 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.loot.AddItemModifier;
 import com.relimer.ironsrestrictions.loot.ChestLootCondition;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.setup.CommonCompatSetup;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -125,5 +126,6 @@ public class LootModifierProvider extends GlobalLootModifierProvider {
                         new LocationCheck(Optional.of(LocationPredicate.Builder.inDimension(Level.OVERWORLD).build()), new BlockPos(0,0,0)),
                         LootItemRandomChanceCondition.randomChance(0.2f).build()
                 }, ItemRegistry.LIGHTNING_PAGE.get(),1));
+        CommonCompatSetup.lootModifierProviders(this);
     }
 }

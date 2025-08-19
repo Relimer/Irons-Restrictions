@@ -7,17 +7,16 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
 
 public class ItemRegistry {
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, IronsRestrictions.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, IronsRestrictions.MODID);
 
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-    }
+    public static void register(IEventBus eventBus) { ITEMS.register(eventBus); }
 
     public static final DeferredHolder<Item, Item> FIRE_PAGE = ITEMS.register("fire_manuscript", () -> new FireManuscript(ItemPropertiesHelper.material().rarity(Rarity.EPIC)));
     public static final DeferredHolder<Item, Item> NATURE_PAGE = ITEMS.register("nature_manuscript", () -> new NatureManuscript(ItemPropertiesHelper.material().rarity(Rarity.EPIC)));

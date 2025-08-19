@@ -33,6 +33,7 @@ repositories {
     maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://maven.kosmx.dev/" }
+    maven { url = "https://api.modrinth.com/maven" }
 }
 
 base {
@@ -125,10 +126,11 @@ dependencies {
     // CURIOS *****************************************************************************************************
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
 
-    // JEI ********************************************************************************************************
-    compileOnly "mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    // OPTIONAL
+    // ALSHANEX-FAMILIARS
+    implementation "maven.modrinth:alshanexs-familiars:1.21.1_v2.0_HotFix"
+
+
 
 
 

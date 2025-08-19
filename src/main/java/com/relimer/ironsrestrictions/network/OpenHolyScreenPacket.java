@@ -2,6 +2,8 @@ package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
+import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.registries.RSchoolRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,7 +31,9 @@ public class OpenHolyScreenPacket implements CustomPacketPayload {
 
     public static void handle(OpenHolyScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            RClientSpellCastHelper.openHolyResearchScreen(packet.hand);
+            RClientSpellCastHelper.openSchoolResearchScreen(packet.hand, RSchoolRegistry.HOLY.get(), ItemRegistry.HOLY_PAGE.get(),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/holy_window.png"),
+                    ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/holy_frame.png"));
         });
     }
 

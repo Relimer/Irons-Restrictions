@@ -22,6 +22,9 @@ public class PayloadHandler {
         payloadRegistrar.playToClient(OpenHolyScreenPacket.TYPE, OpenHolyScreenPacket.STREAM_CODEC, OpenHolyScreenPacket::handle);
         payloadRegistrar.playToClient(OpenBloodScreenPacket.TYPE, OpenBloodScreenPacket.STREAM_CODEC, OpenBloodScreenPacket::handle);
         payloadRegistrar.playToClient(OpenLightningScreenPacket.TYPE, OpenLightningScreenPacket.STREAM_CODEC, OpenLightningScreenPacket::handle);
+
+        CommonCompatSetup.payloadHandler(payloadRegistrar);
+
         payloadRegistrar.playToServer(RLearnSpellPacket.TYPE, RLearnSpellPacket.STREAM_CODEC, RLearnSpellPacket::handle);
     }
 }

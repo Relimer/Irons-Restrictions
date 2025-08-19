@@ -41,8 +41,8 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class SchoolResearchScreen extends Screen {
 
-    private static final ResourceLocation WINDOW_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/window.png");
-    private static final ResourceLocation FRAME_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/spell_frame.png");
+    private static ResourceLocation WINDOW_LOCATION = null;
+    private static ResourceLocation FRAME_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/spell_frame.png");
     public static final int WINDOW_WIDTH = 252;
     public static final int WINDOW_HEIGHT = 256;
     private static final int WINDOW_INSIDE_X = 9;
@@ -61,11 +61,13 @@ public class SchoolResearchScreen extends Screen {
     SchoolType school;
     Item consumableItem;
 
-    public SchoolResearchScreen(Component pTitle, InteractionHand activeHand, SchoolType schoolType, Item item) {
+    public SchoolResearchScreen(Component pTitle, InteractionHand activeHand, SchoolType schoolType, Item item, ResourceLocation window, ResourceLocation frame) {
         super(pTitle);
         this.activeHand = activeHand;
         school = schoolType;
         consumableItem = item;
+        WINDOW_LOCATION = window;
+        FRAME_LOCATION = frame;
     }
 
     List<AbstractSpell> learnableSpells;

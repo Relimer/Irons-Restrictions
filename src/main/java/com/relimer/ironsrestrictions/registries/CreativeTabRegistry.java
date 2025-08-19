@@ -1,10 +1,12 @@
 package com.relimer.ironsrestrictions.registries;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
+import com.relimer.ironsrestrictions.setup.CommonCompatSetup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -44,6 +46,14 @@ public class CreativeTabRegistry {
             event.accept(ItemRegistry.BLOOD_KNOWLEDGE_FRAGMENT.get());
             event.accept(ItemRegistry.LIGHTNING_PAGE.get());
             event.accept(ItemRegistry.LIGHTNING_KNOWLEDGE_FRAGMENT.get());
+
+            CommonCompatSetup.fillCreativeTab(event);
+        }
+    }
+
+    public static void acceptIfPresent(BuildCreativeModeTabContentsEvent event, net.neoforged.neoforge.registries.DeferredHolder<Item, ?> holder) {
+        if (holder != null) {
+            event.accept(holder.get());
         }
     }
 }
