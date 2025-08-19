@@ -127,8 +127,14 @@ dependencies {
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
 
     // OPTIONAL
-    // ALSHANEX-FAMILIARS
+    // ALSHANEXS FAMILIARS
     implementation "maven.modrinth:alshanexs-familiars:1.21.1_v2.0_HotFix"
+
+    // CATACLYSM: SPELLBOOKS
+    implementation "maven.modrinth:cataclysm-spellbooks:1.1.7-1.21"
+    implementation "maven.modrinth:azurelib:3.0.27"
+    implementation "maven.modrinth:l_enders-cataclysm:3.15"
+    implementation "maven.modrinth:lionfish-api:2.6"
 
 
 

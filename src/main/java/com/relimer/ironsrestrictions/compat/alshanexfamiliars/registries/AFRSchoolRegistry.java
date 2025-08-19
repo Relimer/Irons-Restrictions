@@ -4,6 +4,7 @@ import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ModTags;
 import net.alshanex.alshanex_familiars.datagen.AFDamageTypes;
+import net.alshanex.alshanex_familiars.datagen.ItemTagProvider;
 import net.alshanex.alshanex_familiars.registry.AttributeRegistry;
 import net.minecraft.network.chat.Component;
 
@@ -19,7 +20,7 @@ public class AFRSchoolRegistry {
     public static void register() {
         SOUND = registerSchool(new SchoolType(
                 SOUND_RESOURCE,
-                ModTags.FIRE_FOCUS,
+                ItemTagProvider.SOUND_FOCUS,
                 Component.translatable("school.alshanex_familiars.sound").withColor(0xCFFFD2),
                 AttributeRegistry.SOUND_SPELL_POWER,
                 AttributeRegistry.SOUND_MAGIC_RESIST,

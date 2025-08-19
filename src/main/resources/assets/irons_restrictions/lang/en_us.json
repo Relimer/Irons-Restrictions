@@ -30,5 +30,10 @@
   "item.irons_restrictions.sound_manuscript_desc": "Use to learn Sound spells",
   "item.irons_restrictions.sound_knowledge_fragment": "Sound Knowledge Fragment",
 
+  "item.irons_restrictions.abyssal_manuscript": "Abyssal Manuscript",
+  "item.irons_restrictions.abyssal_manuscript_desc": "Use to learn Abyssal spells",
+  "item.irons_restrictions.abyssal_knowledge_fragment": "Abyssal Knowledge Fragment",
+
+
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }
