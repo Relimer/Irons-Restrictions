@@ -2,6 +2,7 @@ package com.relimer.ironsrestrictions.registries;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
+import com.relimer.ironsrestrictions.util.SchoolUtils;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.registries.Registries;
@@ -29,7 +30,7 @@ public class CreativeTabRegistry {
     @SubscribeEvent
     public static void fillCreativeTabs(final BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() == RESTRICTIONS_TAB.get()) {
-            SchoolRegistry.REGISTRY.holders().toList().forEach(holder -> {
+            SchoolUtils.getLoopSchools().forEach(holder -> {
                 SchoolType schoolType = holder.value();
                 ItemStack manuscript = new ItemStack(ItemRegistry.MANUSCRIPT);
                 manuscript.set(ComponentRegistry.SCHOOL_COMPONENT.get(), new SchoolContainer(schoolType));

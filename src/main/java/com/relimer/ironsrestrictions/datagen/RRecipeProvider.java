@@ -4,6 +4,7 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
+import com.relimer.ironsrestrictions.util.SchoolUtils;
 import com.relimer.ironsrestrictions.util.TextureUtils;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import net.minecraft.core.HolderLookup;
@@ -23,13 +24,13 @@ public class RRecipeProvider extends RecipeProvider {
     }
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
-        SchoolRegistry.REGISTRY.holders().toList().forEach(holder -> {
+        SchoolUtils.getLoopSchools().forEach(holder -> {
             ItemStack itemStack = new ItemStack(ItemRegistry.MANUSCRIPT);
             itemStack.set(ComponentRegistry.SCHOOL_COMPONENT, new SchoolContainer(holder.value()));
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, itemStack)
-                    .pattern("AAA")
+                    .pattern(" A ")
                     .pattern("ABA")
-                    .pattern("AAA")
+                    .pattern(" A ")
                     .define('A', io.redspace.ironsspellbooks.registries.ItemRegistry.LOST_KNOWLEDGE_FRAGMENT.get())
                     .define('B', holder.value().getFocus())
                     .unlockedBy("has_fragment", has(io.redspace.ironsspellbooks.registries.ItemRegistry.LOST_KNOWLEDGE_FRAGMENT.get()))

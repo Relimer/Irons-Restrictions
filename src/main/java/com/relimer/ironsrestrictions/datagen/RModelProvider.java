@@ -4,6 +4,7 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
+import com.relimer.ironsrestrictions.util.SchoolUtils;
 import com.relimer.ironsrestrictions.util.TextureUtils;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -35,7 +36,7 @@ public class RModelProvider extends ItemModelProvider {
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/manuscript_base"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/manuscript_overlay"));
 
-        SchoolRegistry.REGISTRY.holders().toList().forEach(holder -> {
+        SchoolUtils.getLoopSchools().forEach(holder -> {
 
             ResourceLocation manuscriptTex = ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/" + holder.value().getId().getPath() + "_manuscript");
             ResourceLocation manuscriptBase = TextureUtils.getTextureOrDefault(manuscriptTex, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/manuscript_base"), existingFileHelper);
