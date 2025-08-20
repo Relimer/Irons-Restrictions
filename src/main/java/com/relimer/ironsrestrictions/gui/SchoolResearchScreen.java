@@ -2,7 +2,10 @@ package com.relimer.ironsrestrictions.gui;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
+import com.relimer.ironsrestrictions.registries.ItemRegistry;
+import com.relimer.ironsrestrictions.util.TextureUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -21,6 +24,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
@@ -28,7 +33,6 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -37,12 +41,13 @@ import org.joml.Vector4f;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class SchoolResearchScreen extends Screen {
 
     private static ResourceLocation WINDOW_LOCATION = null;
-    private static ResourceLocation FRAME_LOCATION = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/spell_frame.png");
+    private static ResourceLocation FRAME_LOCATION = null;
     public static final int WINDOW_WIDTH = 252;
     public static final int WINDOW_HEIGHT = 256;
     private static final int WINDOW_INSIDE_X = 9;
@@ -59,15 +64,15 @@ public class SchoolResearchScreen extends Screen {
     int leftPos, topPos;
     InteractionHand activeHand;
     SchoolType school;
-    Item consumableItem;
 
-    public SchoolResearchScreen(Component pTitle, InteractionHand activeHand, SchoolType schoolType, Item item, ResourceLocation window, ResourceLocation frame) {
+    public SchoolResearchScreen(Component pTitle, InteractionHand activeHand, SchoolType schoolType) {
         super(pTitle);
         this.activeHand = activeHand;
         school = schoolType;
-        consumableItem = item;
-        WINDOW_LOCATION = window;
-        FRAME_LOCATION = frame;
+        WINDOW_LOCATION = TextureUtils.getTextureOrDefault(ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/" + schoolType.getId().getPath() + "_window.png"),
+                ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/window.png"));
+        FRAME_LOCATION = TextureUtils.getTextureOrDefault(ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "textures/gui/research_screen/" + schoolType.getId().getPath() + "_frame.png"),
+                ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/eldritch_research_screen/spell_frame.png"));
     }
 
     List<AbstractSpell> learnableSpells;
@@ -331,7 +336,7 @@ public class SchoolResearchScreen extends Screen {
         int mouseX = (int) pMouseX;
         int mouseY = (int) pMouseY;
         //Only allow initiating the learn process if they are holding a manuscript
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getItemInHand(activeHand).is(consumableItem)) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getItemInHand(activeHand).is(ItemRegistry.MANUSCRIPT)) {
             for (int i = 0; i < nodes.size(); i++) {
                 if (isHoveringNode(nodes.get(i), mouseX, mouseY)) {
                     heldSpellIndex = i;

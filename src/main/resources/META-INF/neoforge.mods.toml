@@ -109,3 +109,10 @@ config="${mod_id}.irons_spellbooks.mixins.json"
     ordering="NONE"
     side="BOTH"
 
+[[dependencies.${mod_id}]]
+    modId="iss_magicfromtheeast"
+    type="optional"
+    versionRange="1.1.7-1.21"
+    ordering="NONE"
+    side="BOTH"
+

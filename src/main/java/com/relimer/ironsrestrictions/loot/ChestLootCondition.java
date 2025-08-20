@@ -15,7 +15,6 @@ import java.util.Set;
 public class ChestLootCondition implements LootItemCondition {
     public static final MapCodec<ChestLootCondition> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    // No fields, so pass a dummy unit to satisfy group()?
                     Codec.BOOL.fieldOf("dummy").forGetter(c -> true)  // always true, ignored
             ).apply(instance, (dummy) -> new ChestLootCondition())
     );
