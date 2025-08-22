@@ -31,10 +31,19 @@ public class RRecipeProvider extends RecipeProvider {
                     .pattern(" A ")
                     .pattern("ABA")
                     .pattern(" A ")
-                    .define('A', io.redspace.ironsspellbooks.registries.ItemRegistry.LOST_KNOWLEDGE_FRAGMENT.get())
+                    .define('A', ItemRegistry.FRAGMENT.get())
                     .define('B', holder.value().getFocus())
-                    .unlockedBy("has_fragment", has(io.redspace.ironsspellbooks.registries.ItemRegistry.LOST_KNOWLEDGE_FRAGMENT.get()))
+                    .unlockedBy("has_fragment", has(ItemRegistry.FRAGMENT.get()))
                     .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, holder.value().getId().getPath() + "_manuscript"));
         });
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.FRAGMENT.get(), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.SCROLL.get())
+                .unlockedBy("has_scroll", has(io.redspace.ironsspellbooks.registries.ItemRegistry.SCROLL.get()))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "fragment"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.UNFINISHED_MANUSCRIPT.get())
+                .requires(ItemRegistry.FRAGMENT.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.MAGIC_CLOTH.get(), 4)
+                .unlockedBy("has_fragment", has(ItemRegistry.FRAGMENT.get()))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "unfinished_manuscript"));
     }
 }

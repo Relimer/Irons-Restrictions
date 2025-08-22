@@ -6,6 +6,7 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.TextureUtils;
+import dev.kosmx.playerAnim.core.util.MathHelper;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -80,6 +81,7 @@ public class SchoolResearchScreen extends Screen {
     SyncedSpellData playerData;
     Vec2 maxViewportOffset;
     Vec2 viewportOffset;
+    int scale;
 
     boolean isMouseHoldingSpell, isMouseDragging;
     int heldSpellIndex = -1;
@@ -300,15 +302,6 @@ public class SchoolResearchScreen extends Screen {
 
     }
 
-    private int colorFromRGBA(Vector4f rgba) {
-        var r = (int) (rgba.x() * 255) & 0xFF;
-        var g = (int) (rgba.y() * 255) & 0xFF;
-        var b = (int) (rgba.z() * 255) & 0xFF;
-        var a = (int) (rgba.w() * 255) & 0xFF;
-
-        return (r << 24) + (g << 16) + (b << 8) + (a);
-    }
-
     private void drawBackdrop(GuiGraphics guiGraphics, int left, int top) {
         float f = Minecraft.getInstance().player != null ? Minecraft.getInstance().player.tickCount * .02f : 0f;
         float color = (Mth.sin(f) + 1) * .25f + .15f;
@@ -345,7 +338,9 @@ public class SchoolResearchScreen extends Screen {
                 }
             }
         }
-        if (!isMouseHoldingSpell) {
+
+        var player = Minecraft.getInstance().player;
+        if (!isMouseHoldingSpell || nodes.get(heldSpellIndex).spell.isLearned(player)) {
             if (isHovering(leftPos + WINDOW_INSIDE_X, topPos + WINDOW_INSIDE_Y, WINDOW_INSIDE_WIDTH, WINDOW_INSIDE_HEIGHT, mouseX, mouseY)) {
                 isMouseDragging = true;
             }
@@ -367,13 +362,22 @@ public class SchoolResearchScreen extends Screen {
     }
 
     @Override
-    public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
-        if (this.isMouseDragging && false) {
-            viewportOffset = new Vec2((float) (viewportOffset.x + pDragX), (float) (viewportOffset.y + pDragY));
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (this.isMouseDragging) {
+            float newX = viewportOffset.x + (float) dragX;
+            float newY = viewportOffset.y + (float) dragY;
+
+            float maxX = maxViewportOffset.x;
+            float maxY = maxViewportOffset.y ;
+
+            viewportOffset = new Vec2(
+                    Mth.clamp(newX, -maxX, maxX),
+                    Mth.clamp(newY, -maxY, maxY)
+            );
             return true;
-        } else {
-            return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
         }
+
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
     }
 
 
@@ -396,8 +400,5 @@ public class SchoolResearchScreen extends Screen {
     }
 
     record SpellNode(AbstractSpell spell, int x, int y) {
-    }
-
-    record NodeConnection(SchoolResearchScreen.SpellNode node1, SchoolResearchScreen.SpellNode node2) {
     }
 }

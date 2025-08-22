@@ -142,6 +142,9 @@ dependencies {
     // MAGIC FROM THE EAST
     implementation "curse.maven:magic-from-the-east-1224162:6864551"
 
+    implementation "curse.maven:snackpirates-aeromancy-additions-1160104:6781033"
+    implementation "curse.maven:expandability-465066:5428824"
+
 
 
 

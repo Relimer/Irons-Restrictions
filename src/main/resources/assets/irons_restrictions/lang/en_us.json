@@ -15,27 +15,27 @@
   "item.irons_restrictions.blood_manuscript_desc": "Use to learn Blood spells",
   "item.irons_restrictions.lightning_manuscript": "Lightning Manuscript",
   "item.irons_restrictions.lightning_manuscript_desc": "Use to learn Lightning spells",
+  "item.irons_restrictions.unfinished_manuscript": "Unfinished Manuscript",
+  "item.irons_restrictions.unfinished_manuscript_desc": "Use to have a chance at learning a random spell",
 
-  "item.irons_spellbooks.ancient_knowledge_fragment": "Knowledge Fragment",
+  "item.irons_restrictions.fragment": "Torn Scroll",
 
 
   "item.irons_restrictions.sound_manuscript": "Sound Manuscript",
   "item.irons_restrictions.sound_manuscript_desc": "Use to learn Sound spells",
-  "item.irons_restrictions.sound_knowledge_fragment": "Sound Knowledge Fragment",
 
   "item.irons_restrictions.abyssal_manuscript": "Abyssal Manuscript",
   "item.irons_restrictions.abyssal_manuscript_desc": "Use to learn Abyssal spells",
-  "item.irons_restrictions.abyssal_knowledge_fragment": "Abyssal Knowledge Fragment",
 
   "item.irons_restrictions.symmetry_manuscript": "Symmetry Manuscript",
   "item.irons_restrictions.symmetry_manuscript_desc": "Use to learn Symmetry spells",
-  "item.irons_restrictions.symmetry_knowledge_fragment": "Symmetry Knowledge Fragment",
   "item.irons_restrictions.spirit_manuscript": "Spirit Manuscript",
   "item.irons_restrictions.spirit_manuscript_desc": "Use to learn Spirit spells",
-  "item.irons_restrictions.spirit_knowledge_fragment": "Spirit Knowledge Fragment",
   "item.irons_restrictions.dune_manuscript": "Dune Manuscript",
   "item.irons_restrictions.dune_manuscript_desc": "Use to learn Dune spells",
-  "item.irons_restrictions.dune_knowledge_fragment": "Dune Knowledge Fragment",
+
+  "item.irons_restrictions.wind_manuscript": "Wind Manuscript",
+  "item.irons_restrictions.wind_manuscript_desc": "Use to learn Wind spells",
 
 
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"

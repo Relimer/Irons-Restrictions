@@ -29,12 +29,16 @@ public class LootModifierProvider extends GlobalLootModifierProvider {
 
     @Override
     protected void start() {
-        this.add("knowledge_fragment",
+        this.add("fragment",
                 new AddItemModifier(new LootItemCondition[]{
                         new ChestLootCondition(),
-                        new LocationCheck(Optional.of(LocationPredicate.Builder.inDimension(Level.OVERWORLD).build()), new BlockPos(0, 0, 0)),
-                        LootItemRandomChanceCondition.randomChance(0.5f).build()
-                }, io.redspace.ironsspellbooks.registries.ItemRegistry.LOST_KNOWLEDGE_FRAGMENT.get(), 4));
+                        LootItemRandomChanceCondition.randomChance(0.6f).build()
+                }, ItemRegistry.FRAGMENT.get(), 4));
+        this.add("unfinished_manuscript",
+                new AddItemModifier(new LootItemCondition[]{
+                        new ChestLootCondition(),
+                        LootItemRandomChanceCondition.randomChance(0.3f).build()
+                }, ItemRegistry.UNFINISHED_MANUSCRIPT.get(), 1));
 
     }
 }

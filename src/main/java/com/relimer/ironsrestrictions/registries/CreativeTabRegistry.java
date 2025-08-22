@@ -36,6 +36,8 @@ public class CreativeTabRegistry {
                 manuscript.set(ComponentRegistry.SCHOOL_COMPONENT.get(), new SchoolContainer(schoolType));
                 event.accept(manuscript);
             });
+            event.accept(ItemRegistry.FRAGMENT.get());
+            event.accept(ItemRegistry.UNFINISHED_MANUSCRIPT.get());
         }
     }
 }
