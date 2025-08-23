@@ -6,7 +6,6 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.TextureUtils;
-import dev.kosmx.playerAnim.core.util.MathHelper;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -25,24 +24,21 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class SchoolResearchScreen extends Screen {
@@ -55,12 +51,6 @@ public class SchoolResearchScreen extends Screen {
     private static final int WINDOW_INSIDE_Y = 18;
     public static final int WINDOW_INSIDE_WIDTH = 234;
     public static final int WINDOW_INSIDE_HEIGHT = 229;
-    private static final int WINDOW_TITLE_X = 8;
-    private static final int WINDOW_TITLE_Y = 6;
-    public static final int BACKGROUND_TILE_WIDTH = 16;
-    public static final int BACKGROUND_TILE_HEIGHT = 16;
-    public static final int BACKGROUND_TILE_COUNT_X = 14;
-    public static final int BACKGROUND_TILE_COUNT_Y = 7;
 
     int leftPos, topPos;
     InteractionHand activeHand;
@@ -81,7 +71,6 @@ public class SchoolResearchScreen extends Screen {
     SyncedSpellData playerData;
     Vec2 maxViewportOffset;
     Vec2 viewportOffset;
-    int scale;
 
     boolean isMouseHoldingSpell, isMouseDragging;
     int heldSpellIndex = -1;
@@ -99,14 +88,13 @@ public class SchoolResearchScreen extends Screen {
         this.leftPos = (this.width - WINDOW_WIDTH) / 2;
         this.topPos = (this.height - WINDOW_HEIGHT) / 2;
         nodes = new ArrayList<>();
-        RandomSource randomSource = RandomSource.create(431L);
 
         float f = Mth.TWO_PI / 6; // current angel between nodes
         float r = 35; // current radius
         float circumference = 0; // tracked length of current ring
         float offset = 0.5f; // angular offset of this ring
         float a = offset; // running angle
-        for (int i = 0; i < learnableSpells.size(); i++) {
+        for (AbstractSpell learnableSpell : learnableSpells) {
             if (circumference > r * Mth.TWO_PI) {
                 r += 40;
                 f = 35 / r;
@@ -116,7 +104,7 @@ public class SchoolResearchScreen extends Screen {
             a += f;
             int x = leftPos + WINDOW_WIDTH / 2 - 8 + (int) (r * Mth.cos(a));
             int y = topPos + WINDOW_HEIGHT / 2 - 8 + (int) (r * Mth.sin(a));
-            nodes.add(new SchoolResearchScreen.SpellNode(learnableSpells.get(i), x, y));
+            nodes.add(new SpellNode(learnableSpell, x, y));
             circumference += r * f * 1.1f;
         }
         float maxDistX = 0;
@@ -138,7 +126,7 @@ public class SchoolResearchScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
         drawBackdrop(guiGraphics, leftPos + WINDOW_INSIDE_X, topPos + WINDOW_INSIDE_Y);
@@ -185,7 +173,35 @@ public class SchoolResearchScreen extends Screen {
     private void renderProgressOverlay(GuiGraphics gui, int x, int y, float progress) {
         x += (int) viewportOffset.x;
         y += (int) viewportOffset.y;
-        gui.fill(x, y, x + Mth.ceil(16.0F * progress), y + 16, FastColor.ARGB32.color(127, 244, 65, 255));
+        int width = Mth.ceil(16.0F * progress);
+        int height = 16;
+
+        int bbx = leftPos + WINDOW_INSIDE_X;
+        int bby = topPos + WINDOW_INSIDE_Y;
+        int bbw = WINDOW_INSIDE_WIDTH;
+        int bbh = WINDOW_INSIDE_HEIGHT;
+
+        if (x < bbx) {
+            int xDiff = bbx - x;
+            width -= xDiff;
+            x = bbx;
+        } else if (x > bbx + bbw - width) {
+            int xDiff = x - (bbx + bbw - width);
+            width -= xDiff;
+        }
+
+        if (y < bby) {
+            int yDiff = bby - y;
+            height -= yDiff;
+            y = bby;
+        } else if (y > bby + bbh - height) {
+            int yDiff = y - (bby + bbh - height);
+            height -= yDiff;
+        }
+
+        if (width > 0 && height > 0) {
+            gui.fill(x, y, x + width, y + height, FastColor.ARGB32.color(127, 244, 65, 255));
+        }
     }
 
     private void drawNode(GuiGraphics guiGraphics, SchoolResearchScreen.SpellNode node, LocalPlayer player, boolean drawProgress) {
@@ -256,6 +272,7 @@ public class SchoolResearchScreen extends Screen {
     private void handleConnections(GuiGraphics guiGraphics, float partialTick) {
         guiGraphics.fill(0, 0, this.width, this.height, 0);
         RenderSystem.enableDepthTest();
+        assert Minecraft.getInstance().player != null;
         float f = Mth.sin((Minecraft.getInstance().player.tickCount + partialTick) * .1f);
         float glowIntensity = f * f * .8f + .2f;
         var color = new Vector4f(135 / 255f, 154 / 255f, 174 / 255f, 0.5f);
@@ -350,7 +367,6 @@ public class SchoolResearchScreen extends Screen {
     }
 
     public boolean isHoveringNode(SchoolResearchScreen.SpellNode node, int mouseX, int mouseY) {
-        //TODO: make outside screen unclickable
         return isHovering(node.x - 2 + (int) viewportOffset.x, node.y - 2 + (int) viewportOffset.y, 16 + 4, 16 + 4, mouseX, mouseY);
     }
 
@@ -383,6 +399,7 @@ public class SchoolResearchScreen extends Screen {
 
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         InputConstants.Key mouseKey = InputConstants.getKey(pKeyCode, pScanCode);
+        assert this.minecraft != null;
         if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
             this.onClose();
             return true;
@@ -396,6 +413,15 @@ public class SchoolResearchScreen extends Screen {
     }
 
     private boolean isHovering(int x, int y, int width, int height, int mouseX, int mouseY) {
+        int guiX = leftPos + WINDOW_INSIDE_X;
+        int guiY = topPos + WINDOW_INSIDE_Y;
+        int guiW = WINDOW_INSIDE_WIDTH;
+        int guiH = WINDOW_INSIDE_HEIGHT;
+
+        if (!(mouseX >= guiX && mouseX < guiX + guiW &&
+                mouseY >= guiY && mouseY < guiY + guiH)) {
+            return false;
+        }
         return mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
     }
 

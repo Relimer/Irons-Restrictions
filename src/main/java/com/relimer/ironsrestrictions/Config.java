@@ -30,6 +30,10 @@ public class Config {
                     "irons_spellbooks:telekinesis",
                     "irons_spellbooks:eldritch_blast",
                     "irons_spellbooks:pocket_dimension"), value -> value instanceof String);
+    public static final ModConfigSpec.DoubleValue FailChance
+            = BUILDER
+            .comment("The chance for an Unfinished Manuscript to fail")
+            .defineInRange("failChance", 0.3, 0.0, 1.0);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }

@@ -1,11 +1,8 @@
 package com.relimer.ironsrestrictions.item;
 
 import com.relimer.ironsrestrictions.Config;
-import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
-import com.relimer.ironsrestrictions.util.SchoolContainer;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -34,15 +31,16 @@ public class UnfinishedManuscript extends Item {
     public UnfinishedManuscript() {
         super(new Properties().rarity(Rarity.EPIC));
     }
-    private SchoolContainer getOrCreate(ItemStack itemStack) {
-        return itemStack.getOrDefault(ComponentRegistry.SCHOOL_COMPONENT.get(), new SchoolContainer(SchoolRegistry.FIRE.get()));
-    }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand pUsedHand) {
         ItemStack itemStack = player.getItemInHand(pUsedHand);
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            float failureChance = 0.3f;
+            if (player.getCooldowns().isOnCooldown(this)) {
+                ItemStack stack = player.getItemInHand(pUsedHand);
+                return InteractionResultHolder.fail(stack);
+            }
+            double failureChance = Config.FailChance.getAsDouble();
 
             List<? extends String> spellIds = Config.ExcludeRandomLearntSpells.get();
             var learnableSpells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream().filter(spell -> !spell.isLearned(player)).toList());
@@ -67,9 +65,9 @@ public class UnfinishedManuscript extends Item {
             if (!serverPlayer.getAbilities().instabuild) {
                 itemStack.shrink(1);
             }
+            player.getCooldowns().addCooldown(this, 20);
 
-            if (player.getRandom().nextFloat() < failureChance) {
-                // Failure logic
+            if (player.getRandom().nextDouble() < failureChance) {
                 serverPlayer.displayClientMessage(Component.literal("The manuscript crumbles to dust...").withStyle(ChatFormatting.DARK_RED), true);
                 player.playNotifySound(SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                 return InteractionResultHolder.success(itemStack);
