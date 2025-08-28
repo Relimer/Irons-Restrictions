@@ -1,6 +1,7 @@
 package com.relimer.ironsrestrictions.item;
 
 import com.relimer.ironsrestrictions.Config;
+import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -60,29 +61,36 @@ public class UnfinishedManuscript extends Item {
             if (learnableSpells.isEmpty()) {
                 serverPlayer.displayClientMessage(Component.literal("You already know all available spells."), true);
                 player.playNotifySound(SoundEvents.FLINTANDSTEEL_USE, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
+                IronsRestrictions.LOGGER.info(player.getName().getString() + " Already Knows All Spells");
                 return InteractionResultHolder.fail(itemStack);
-            }
-            if (!serverPlayer.getAbilities().instabuild) {
-                itemStack.shrink(1);
-            }
-            player.getCooldowns().addCooldown(this, 20);
-
-            if (player.getRandom().nextDouble() < failureChance) {
-                serverPlayer.displayClientMessage(Component.literal("The manuscript crumbles to dust...").withStyle(ChatFormatting.DARK_RED), true);
-                player.playNotifySound(SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
-                return InteractionResultHolder.success(itemStack);
             }
 
             var chosenSpell = learnableSpells.get(player.getRandom().nextInt(learnableSpells.size()));
             var data = MagicData.getPlayerMagicData(serverPlayer).getSyncedData();
-            if (chosenSpell != SpellRegistry.none() && !data.isSpellLearned(chosenSpell) && itemStack.is(ItemRegistry.UNFINISHED_MANUSCRIPT) && itemStack.getCount() > 0) {
+            if (player.getRandom().nextDouble() < failureChance) {
+                serverPlayer.displayClientMessage(Component.literal("The manuscript crumbles to dust...").withStyle(ChatFormatting.DARK_RED), true);
+                player.playNotifySound(SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
+                IronsRestrictions.LOGGER.info(player.getName().getString() + "'s Manuscript Crumbled");
+            }
+            else if (chosenSpell != SpellRegistry.none() && !data.isSpellLearned(chosenSpell) && itemStack.getCount() > 0) {
+                serverPlayer.displayClientMessage(Component.literal("You learned a new spell: " + chosenSpell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
                 player.playNotifySound(io.redspace.ironsspellbooks.registries.SoundRegistry.LEARN_ELDRITCH_SPELL.get(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                 data.learnSpell(chosenSpell);
+                IronsRestrictions.LOGGER.info(player.getName().getString() + " learnt Spell: " + chosenSpell);
             }
-            serverPlayer.displayClientMessage(Component.literal("You learned a new spell: " + chosenSpell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
+            else {
+                IronsRestrictions.LOGGER.error(player.getName().getString() + " failed to learn spell: " + chosenSpell + "\nI wonder what went wrong?");
+                return InteractionResultHolder.fail(itemStack);
+            }
 
+            if (!serverPlayer.getAbilities().instabuild) {
+                itemStack.shrink(1);
+            }
+            player.getCooldowns().addCooldown(this, 20);
             return InteractionResultHolder.success(itemStack);
         }
+
+        IronsRestrictions.LOGGER.error("Failed to learn spell, is this client-side?");
         return InteractionResultHolder.fail(itemStack);
     }
 

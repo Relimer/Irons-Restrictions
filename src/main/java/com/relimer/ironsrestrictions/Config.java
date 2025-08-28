@@ -14,6 +14,10 @@ public class Config {
     public static final ModConfigSpec.BooleanValue TintOverlayPage = BUILDER
             .comment("For untextured items, should the generated texture tint the overlay layer")
             .define("tintOverlayPage", true);
+
+    public static final ModConfigSpec.BooleanValue ImbuedItemsRequireLearning = BUILDER
+            .comment("If true, to use a spell on an imbued item, the spell must be learnt")
+            .define("imbuedItemsRequireLearning", false);
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DefaultLearntSpells = BUILDER
             .comment("A list of spells that the player will already know")
             .defineList("defaultLearntSpells", List.of(

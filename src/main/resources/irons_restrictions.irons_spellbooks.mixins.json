@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EldritchResearchScreenMixin",
-    "AutomagicallyUnlearnSpells"
+    "AutomagicallyUnlearnSpells",
+    "AbstractSpellMixin",
+    "ArcaneAnvilMenuMixin",
+    "ItemCombinerMenuAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
