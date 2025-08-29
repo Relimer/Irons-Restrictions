@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "irons_restrictions:fragment"
+    },
+    "B": {
+      "tag": "irons_spellbooks:lightning_focus"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "item": "irons_restrictions:manuscript",
+    "nbt": {
+      "SchoolId": "irons_spellbooks:lightning"
+    }
+  }
+}

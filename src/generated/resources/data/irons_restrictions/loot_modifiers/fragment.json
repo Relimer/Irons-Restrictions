@@ -1,0 +1,14 @@
+{
+  "type": "irons_restrictions:add_item",
+  "conditions": [
+    {
+      "condition": "irons_restrictions:is_chest_loot"
+    },
+    {
+      "chance": 0.6,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "count": 4,
+  "item": "irons_restrictions:fragment"
+}

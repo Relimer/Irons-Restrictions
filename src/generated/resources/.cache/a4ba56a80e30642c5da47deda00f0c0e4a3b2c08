@@ -1,0 +1,4 @@
+// 1.20.1	2025-08-29T13:50:32.3723271	Global Loot Modifiers : irons_restrictions
+7ef52a5a15c4e16dba626915aa7cbd3bd8b6b8cf data/forge/loot_modifiers/global_loot_modifiers.json
+4bf0620ebbef3c4112209851edbc0bdfaae1856a data/irons_restrictions/loot_modifiers/fragment.json
+213cfca8ff15704b6cbf31dd527b67c99d1680ef data/irons_restrictions/loot_modifiers/unfinished_manuscript.json

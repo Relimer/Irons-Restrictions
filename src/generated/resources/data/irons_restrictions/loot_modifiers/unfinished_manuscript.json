@@ -1,0 +1,13 @@
+{
+  "type": "irons_restrictions:add_item",
+  "conditions": [
+    {
+      "condition": "irons_restrictions:is_chest_loot"
+    },
+    {
+      "chance": 0.3,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "irons_restrictions:unfinished_manuscript"
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fragment": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "irons_restrictions:fragment"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "irons_restrictions:unfinished_manuscript"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fragment",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "irons_restrictions:unfinished_manuscript"
+    ]
+  },
+  "sends_telemetry_event": false
+}
