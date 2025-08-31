@@ -127,7 +127,7 @@ dependencies {
     implementation "dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_version}"
 
     // CURIOS *****************************************************************************************************
-    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
+    implementation "curse.maven:curios-309927:6529130"
 
     // OPTIONAL
     // ALSHANEXS FAMILIARS
@@ -145,7 +145,14 @@ dependencies {
     implementation "curse.maven:snackpirates-aeromancy-additions-1160104:6781033"
     implementation "curse.maven:expandability-465066:5428824"
 
-
+    implementation "curse.maven:fallen-gems-affixes-1286177:6927716"
+    implementation "curse.maven:patchouli-306770:6842247"
+    implementation "curse.maven:additional-attributes-986624:6388896"
+    implementation "curse.maven:apotheosis-313970:6926309"
+    implementation "curse.maven:placebo-283644:6926281"
+    implementation "curse.maven:apothic-spawners-986583:6751589"
+    implementation "curse.maven:apothic-enchanting-1063926:6926290"
+    implementation "curse.maven:apothic-attributes-898963:6751650"
 
 
 
