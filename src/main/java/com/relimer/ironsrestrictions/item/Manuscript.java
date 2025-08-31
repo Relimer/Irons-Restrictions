@@ -37,8 +37,9 @@ public class Manuscript extends Item {
         if (player instanceof ServerPlayer serverPlayer) {
             SchoolContainer schoolComponent = ManuscriptData.getSchoolContainer(itemStack);
             Messages.sendToPlayer(new OpenSchoolScreenPacket(pUsedHand, schoolComponent.getSchoolType()), serverPlayer);
+            return InteractionResultHolder.success(itemStack);
         }
-        return super.use(level, player, pUsedHand);
+        return InteractionResultHolder.fail(itemStack);
     }
 
 

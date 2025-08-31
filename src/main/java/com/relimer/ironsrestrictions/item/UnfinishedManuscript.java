@@ -60,7 +60,7 @@ public class UnfinishedManuscript extends Item {
             }
 
             if (learnableSpells.isEmpty()) {
-                serverPlayer.displayClientMessage(Component.literal("You already know all available spells."), true);
+                serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.full"), true);
                 player.playNotifySound(SoundEvents.FLINTANDSTEEL_USE, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                 IronsRestrictions.LOGGER.info(player.getName().getString() + " Already Knows All Spells");
                 return InteractionResultHolder.fail(itemStack);
@@ -69,12 +69,12 @@ public class UnfinishedManuscript extends Item {
             var chosenSpell = learnableSpells.get(player.getRandom().nextInt(learnableSpells.size()));
             var data = MagicData.getPlayerMagicData(serverPlayer).getSyncedData();
             if (player.getRandom().nextDouble() < failureChance) {
-                serverPlayer.displayClientMessage(Component.literal("The manuscript crumbles to dust...").withStyle(ChatFormatting.DARK_RED), true);
+                serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.fail").withStyle(ChatFormatting.DARK_RED), true);
                 player.playNotifySound(SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                 IronsRestrictions.LOGGER.info(player.getName().getString() + "'s Manuscript Crumbled");
             }
             else if (chosenSpell != SpellRegistry.none() && !data.isSpellLearned(chosenSpell) && itemStack.getCount() > 0) {
-                serverPlayer.displayClientMessage(Component.literal("You learned a new spell: " + chosenSpell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
+                serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.success").append(chosenSpell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
                 player.playNotifySound(io.redspace.ironsspellbooks.registries.SoundRegistry.LEARN_ELDRITCH_SPELL.get(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                 data.learnSpell(chosenSpell);
                 IronsRestrictions.LOGGER.info(player.getName().getString() + " learnt Spell: " + chosenSpell);
