@@ -1,5 +1,6 @@
 package com.relimer.ironsrestrictions.item;
 
+import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.OpenSchoolScreenPacket;
 import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
@@ -34,13 +35,20 @@ public class Manuscript extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand pUsedHand) {
         ItemStack itemStack = player.getItemInHand(pUsedHand);
+        IronsRestrictions.LOGGER.info("Player: " + player);
 
         if (player instanceof ServerPlayer serverPlayer) {
+            IronsRestrictions.LOGGER.info("Server Player: " + serverPlayer);
             SchoolContainer schoolComponent = itemStack.getOrDefault(ComponentRegistry.SCHOOL_COMPONENT.get(), new SchoolContainer(SchoolRegistry.FIRE.get()));
-            ResourceLocation id = schoolComponent.getSchoolId();
+            IronsRestrictions.LOGGER.info("Component: " + schoolComponent);
             PacketDistributor.sendToPlayer(serverPlayer, new OpenSchoolScreenPacket(pUsedHand, schoolComponent.getSchoolType()));
+
+            IronsRestrictions.LOGGER.info("Success");
+            return InteractionResultHolder.success(itemStack);
         }
-        return super.use(level, player, pUsedHand);
+
+        IronsRestrictions.LOGGER.info("Fail");
+        return InteractionResultHolder.fail(itemStack);
     }
     @Override
     public @NotNull Component getName(@NotNull ItemStack itemStack) {

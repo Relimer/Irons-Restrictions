@@ -2,6 +2,7 @@ package com.relimer.ironsrestrictions.network;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.player.RClientSpellCastHelper;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -13,13 +14,15 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class OpenSchoolScreenPacket implements CustomPacketPayload {
     private final InteractionHand hand;
-    private static SchoolType schoolType = null;
+    private static SchoolType schoolType;
 
     public static final Type<OpenSchoolScreenPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "open_school_screen"));
     public static final StreamCodec<RegistryFriendlyByteBuf, OpenSchoolScreenPacket> STREAM_CODEC = CustomPacketPayload.codec(OpenSchoolScreenPacket::write, OpenSchoolScreenPacket::new);
 
     public OpenSchoolScreenPacket(FriendlyByteBuf buf) {
         this.hand = buf.readEnum(InteractionHand.class);
+        ResourceLocation id = buf.readResourceLocation();
+        this.schoolType = SchoolRegistry.REGISTRY.get(id);
     }
 
     public OpenSchoolScreenPacket(InteractionHand pHand, SchoolType schoolType) {
@@ -29,11 +32,12 @@ public class OpenSchoolScreenPacket implements CustomPacketPayload {
 
     public void write(FriendlyByteBuf buf) {
         buf.writeEnum(this.hand);
+        buf.writeResourceLocation(this.schoolType.getId());
     }
 
     public static void handle(OpenSchoolScreenPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            RClientSpellCastHelper.openSchoolResearchScreen(packet.hand, schoolType);
+            RClientSpellCastHelper.openSchoolResearchScreen(packet.hand, packet.schoolType);
         });
     }
 
