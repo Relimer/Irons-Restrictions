@@ -1,6 +1,7 @@
 package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
 import com.relimer.ironsrestrictions.Config;
+import com.relimer.ironsrestrictions.compat.FallenGemsAffixSpellCastTrigger;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.item.Scroll;
@@ -14,8 +15,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 
 @Mixin(AbstractSpell.class)
-public abstract class AutomagicallyUnlearnSpells {
+public abstract class AbstractSpellMixin {
     @Shadow(remap = false)
     public abstract boolean obfuscateStats(Player player);
     @Shadow(remap = false)
@@ -65,18 +66,25 @@ public abstract class AutomagicallyUnlearnSpells {
                 return true;
             }
         }
-        LazyOptional<ICuriosItemHandler> curiosHandlerOpt = CuriosApi.getCuriosInventory(player);
-        if (curiosHandlerOpt.isPresent()) {
-            ICuriosItemHandler handler = curiosHandlerOpt.orElse(null);
-            for (Map.Entry<String, ICurioStacksHandler> entry : handler.getCurios().entrySet()) {
-                for (int i = 0; i < entry.getValue().getSlots(); i++) {
-                    ItemStack curioStack = entry.getValue().getStacks().getStackInSlot(i);
-                    if (irons_Restrictions$isSpellImbued(curioStack, spell)) {
-                        return true;
+        if(ModList.get().isLoaded("curios")) {
+            LazyOptional<ICuriosItemHandler> curiosHandlerOpt = CuriosApi.getCuriosInventory(player);
+            if (curiosHandlerOpt.isPresent()) {
+                ICuriosItemHandler handler = curiosHandlerOpt.orElse(null);
+                for (Map.Entry<String, ICurioStacksHandler> entry : handler.getCurios().entrySet()) {
+                    for (int i = 0; i < entry.getValue().getSlots(); i++) {
+                        ItemStack curioStack = entry.getValue().getStacks().getStackInSlot(i);
+                        if (irons_Restrictions$isSpellImbued(curioStack, spell)) {
+                            return true;
+                        }
                     }
                 }
             }
         }
+
+        if(ModList.get().isLoaded("fallen_gems_affixes")) {
+            return FallenGemsAffixSpellCastTrigger.getter(player);
+        }
+
         return false;
     }
 
