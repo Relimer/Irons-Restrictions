@@ -44,6 +44,8 @@
   "item.irons_restrictions.technomancy_manuscript": "Technomancy Manuscript",
   "item.irons_restrictions.technomancy_manuscript_desc": "Use to learn Technomancy spells",
 
+  "item.irons_restrictions.aqua_manuscript": "Aqua Manuscript",
+  "item.irons_restrictions.aqua_manuscript_desc": "Use to learn Aqua spells",
 
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }
