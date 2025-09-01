@@ -471,3 +471,15 @@ forge*changelog.txt
 /src/generated/resources/data/irons_restrictions/recipe/unfinished_manuscript.json
 /runs/client/usercache.json
 /runs/client/usernamecache.json
+/runs/client/logs/2025-08-31-4.log.gz
+/runs/client/logs/2025-09-01-1.log.gz
+/runs/data/logs/2025-09-01-1.log.gz
+/runs/client/logs/2025-09-01-2.log.gz
+/runs/data/logs/2025-09-01-2.log.gz
+/runs/data/logs/2025-09-01-3.log.gz
+/runs/data/logs/2025-09-01-4.log.gz
+/runs/data/logs/2025-09-02-1.log.gz
+/src/generated/resources/pack.mcmeta
+/runs/data/config/placebo.cfg
+/src/generated/resources/data/irons_restrictions/advancement/recipes/misc/wind_manuscript.json
+/src/generated/resources/data/irons_restrictions/recipe/wind_manuscript.json
