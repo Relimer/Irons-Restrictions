@@ -5,14 +5,11 @@ import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
 import com.relimer.ironsrestrictions.util.SchoolUtils;
-import com.relimer.ironsrestrictions.util.TextureUtils;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;

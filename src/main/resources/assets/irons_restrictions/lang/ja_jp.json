@@ -1,0 +1,48 @@
+{
+  "item.irons_restrictions.fire_manuscript": "炎の写本",
+  "item.irons_restrictions.fire_manuscript_desc": "炎の呪文を学ぶために使用する",
+  "item.irons_restrictions.nature_manuscript": "自然の写本",
+  "item.irons_restrictions.nature_manuscript_desc": "自然の呪文を学ぶために使用する",
+  "item.irons_restrictions.evocation_manuscript": "召喚の写本",
+  "item.irons_restrictions.evocation_manuscript_desc": "召喚の呪文を学ぶために使用する",
+  "item.irons_restrictions.ender_manuscript": "エンダーの写本",
+  "item.irons_restrictions.ender_manuscript_desc": "エンダーの呪文を学ぶために使用する",
+  "item.irons_restrictions.ice_manuscript": "氷の写本",
+  "item.irons_restrictions.ice_manuscript_desc": "氷の呪文を学ぶために使用する",
+  "item.irons_restrictions.holy_manuscript": "聖の写本",
+  "item.irons_restrictions.holy_manuscript_desc": "聖の呪文を学ぶために使用する",
+  "item.irons_restrictions.blood_manuscript": "血の写本",
+  "item.irons_restrictions.blood_manuscript_desc": "血の呪文を学ぶために使用する",
+  "item.irons_restrictions.lightning_manuscript": "雷の写本",
+  "item.irons_restrictions.lightning_manuscript_desc": "雷の呪文を学ぶために使用する",
+  "item.irons_restrictions.unfinished_manuscript": "不完全な写本",
+  "item.irons_restrictions.unfinished_manuscript_desc": "使用するとランダムな呪文を修得出来る可能性がある",
+  "item.irons_restrictions.unfinished_manuscript.full": "これ以上学べる呪文は無いようだ",
+  "item.irons_restrictions.unfinished_manuscript.fail": "写本は塵に消えた...",
+  "item.irons_restrictions.unfinished_manuscript.success": "新しい呪文を修得した: ",
+  "item.irons_restrictions.fragment": "破れたスクロール",
+
+
+  "item.irons_restrictions.sound_manuscript": "音の写本",
+  "item.irons_restrictions.sound_manuscript_desc": "音の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.abyssal_manuscript": "深淵の写本",
+  "item.irons_restrictions.abyssal_manuscript_desc": "深淵の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.symmetry_manuscript": "均衡の写本",
+  "item.irons_restrictions.symmetry_manuscript_desc": "均衡の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.spirit_manuscript": "精霊の写本",
+  "item.irons_restrictions.spirit_manuscript_desc": "精霊の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.dune_manuscript": "砂の写本",
+  "item.irons_restrictions.dune_manuscript_desc": "砂の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.wind_manuscript": "風の写本",
+  "item.irons_restrictions.wind_manuscript_desc": "風の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.technomancy_manuscript": "テクノマンシーの写本",
+  "item.irons_restrictions.technomancy_manuscript_desc": "テクノマンシーの呪文を学ぶために使用する",
+
+  "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictionsのアイテム"
+}

@@ -2,7 +2,6 @@ package com.relimer.ironsrestrictions.item;
 
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.IronsRestrictions;
-import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;

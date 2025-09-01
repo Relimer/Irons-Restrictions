@@ -1,19 +1,14 @@
 package com.relimer.ironsrestrictions.setup;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.render.ManuscriptModel;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
-import com.relimer.ironsrestrictions.util.SchoolUtils;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

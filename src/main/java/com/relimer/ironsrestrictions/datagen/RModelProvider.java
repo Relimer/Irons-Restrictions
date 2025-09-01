@@ -1,19 +1,11 @@
 package com.relimer.ironsrestrictions.datagen;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
-import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
-import com.relimer.ironsrestrictions.util.SchoolContainer;
 import com.relimer.ironsrestrictions.util.SchoolUtils;
 import com.relimer.ironsrestrictions.util.TextureUtils;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.SchoolType;
-import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 

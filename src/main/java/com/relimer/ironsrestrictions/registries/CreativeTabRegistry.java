@@ -3,7 +3,6 @@ package com.relimer.ironsrestrictions.registries;
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
 import com.relimer.ironsrestrictions.util.SchoolUtils;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;

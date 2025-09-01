@@ -2,11 +2,6 @@ package com.relimer.ironsrestrictions.registries;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.item.*;
-import io.redspace.ironsspellbooks.api.item.weapons.ExtendedSwordItem;
-import io.redspace.ironsspellbooks.api.item.weapons.MagicSwordItem;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.item.weapons.ExtendedWeaponTier;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
