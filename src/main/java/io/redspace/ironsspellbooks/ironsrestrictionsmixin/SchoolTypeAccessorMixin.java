@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(SchoolType.class)
 public interface SchoolTypeAccessorMixin {
-    @Accessor("focus")
+    @Accessor(value = "focus")
     TagKey<Item> getFocus();
 }
