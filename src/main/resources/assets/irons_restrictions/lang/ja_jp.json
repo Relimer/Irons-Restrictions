@@ -44,5 +44,8 @@
   "item.irons_restrictions.technomancy_manuscript": "テクノマンシーの写本",
   "item.irons_restrictions.technomancy_manuscript_desc": "テクノマンシーの呪文を学ぶために使用する",
 
+  "item.irons_restrictions.aqua_manuscript": "水の写本",
+  "item.irons_restrictions.aqua_manuscript_desc": "水の呪文を学ぶために使用する",
+
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictionsのアイテム"
 }
