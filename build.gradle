@@ -195,6 +195,17 @@ java {
     withSourcesJar()
 }
 
+tasks.jarJar.configure {
+    archiveClassifier = ""
+    dependsOn('reobfJar')
+}
+
+reobf {
+    jarJar {}
+}
+
+jar.finalizedBy('reobfJarJar')
+
 artifacts {
     archives sourcesJar
 }
@@ -221,6 +232,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 mixin {
-    add sourceSets.main, 'irons_restrictions.refmap.json'
-    config 'irons_restrictions.irons_spellbooks.mixins.json'
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.irons_spellbooks.mixins.json"
 }
