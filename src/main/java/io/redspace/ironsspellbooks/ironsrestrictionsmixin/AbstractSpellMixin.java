@@ -1,12 +1,13 @@
 package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
 import com.relimer.ironsrestrictions.Config;
-import io.redspace.ironsspellbooks.api.item.weapons.MagicSwordItem;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
-import io.redspace.ironsspellbooks.api.spells.SpellSlot;
+import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.item.Scroll;
 import io.redspace.ironsspellbooks.item.SpellBook;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,13 +20,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
-import top.theillusivec4.curios.common.capability.CurioItemHandler;
 
 import java.util.Map;
 import java.util.Optional;
 
 @Mixin(AbstractSpell.class)
 public class AbstractSpellMixin {
+    @Inject(
+            method = "canBeCastedBy",
+            at = @At(value = "INVOKE", target = "Lio/redspace/ironsspellbooks/api/spells/AbstractSpell;isLearned(Lnet/minecraft/world/entity/player/Player;)Z"),
+            cancellable = true
+    )
+    private void onCanBeCastedBy(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
+        AbstractSpell spell = (AbstractSpell) (Object) this;
+        if (spell.requiresLearning() && redirectIsLearned(spell, player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
+            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.literal("You haven't unlocked this rarity yet!").withStyle(ChatFormatting.RED)));
+        }
+    }
 
     @Redirect(
             method = "canBeCastedBy",
@@ -37,7 +48,22 @@ public class AbstractSpellMixin {
     private boolean redirectIsLearned(AbstractSpell spell, Player player) {
         if (player == null) return false;
         if (spell.isLearned(player)) return true;
+        return irons_Restrictions$imbuedChecks(spell, player);
+    }
 
+    @Unique
+    private boolean irons_Restrictions$hasUnlockedRarity(AbstractSpell abstractSpell, int spellLevel, Player player) {
+        SpellRarity rarity = abstractSpell.getRarity(spellLevel);
+        int minLevel = abstractSpell.getMinLevelForRarity(rarity);
+        if(minLevel <= abstractSpell.getMinLevelForRarity(ClientRarityData.getCurrentRarity())) {
+            return true;
+        }
+
+        return irons_Restrictions$imbuedChecks(abstractSpell, player);
+    }
+
+    @Unique
+    private boolean irons_Restrictions$imbuedChecks(AbstractSpell spell, Player player) {
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack held = player.getItemInHand(hand);
             if (irons_Restrictions$isSpellImbued(held, spell)) {
