@@ -2,22 +2,50 @@ package com.relimer.ironsrestrictions.setup;
 
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.IronsRestrictions;
+import com.relimer.ironsrestrictions.anim.Animations;
 import com.relimer.ironsrestrictions.registries.ComponentRegistry;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.render.ManuscriptModel;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
+import dev.kosmx.playerAnim.api.layered.IAnimation;
+import dev.kosmx.playerAnim.api.layered.ModifierLayer;
+import dev.kosmx.playerAnim.api.layered.modifier.AdjustmentModifier;
+import dev.kosmx.playerAnim.api.layered.modifier.MirrorModifier;
+import dev.kosmx.playerAnim.core.util.Vec3f;
+import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationFactory;
+import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
+import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
+import io.redspace.ironsspellbooks.player.ClientMagicData;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+
+import java.util.Optional;
 
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = IronsRestrictions.MODID)
 public class ClientSetup {
+
+    @SubscribeEvent
+    public static void clintSetup(final FMLClientSetupEvent event) {
+        PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(
+                Animations.ANIMATION_RESOURCE,
+                42,
+                ClientSetup::registerPlayerAnimation);
+    }
+    private static IAnimation registerPlayerAnimation(AbstractClientPlayer player) {
+        //This will be invoked for every new player
+        return new ModifierLayer<>();
+    }
     @SubscribeEvent
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         event.register((stack, tintIndex) -> {

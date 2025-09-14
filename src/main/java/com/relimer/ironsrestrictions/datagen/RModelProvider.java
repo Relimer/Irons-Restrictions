@@ -27,6 +27,8 @@ public class RModelProvider extends ItemModelProvider {
                 .texture("layer2", ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/manuscript_overlay"));
         basicItem(ItemRegistry.FRAGMENT.get());
         basicItem(ItemRegistry.UNFINISHED_MANUSCRIPT.get());
+        basicItem(ItemRegistry.EPIC_UPGRADE.get());
+
 
         SchoolUtils.getLoopSchools().forEach(holder -> {
             ResourceLocation manuscriptTex = ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/" + holder.value().getId().getPath() + "_manuscript");

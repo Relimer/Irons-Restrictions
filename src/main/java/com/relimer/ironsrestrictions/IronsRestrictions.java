@@ -1,5 +1,6 @@
 package com.relimer.ironsrestrictions;
 import com.relimer.ironsrestrictions.registries.*;
+import io.redspace.ironsspellbooks.player.ClientMagicData;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -45,6 +46,7 @@ public class IronsRestrictions {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
+
         }
     }
     public static ResourceLocation id(@NotNull String path) {
