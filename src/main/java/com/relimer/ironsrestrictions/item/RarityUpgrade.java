@@ -1,32 +1,17 @@
 package com.relimer.ironsrestrictions.item;
 
-import com.relimer.ironsrestrictions.Config;
-import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.anim.Animations;
-import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
+import com.relimer.ironsrestrictions.network.PlayAnimationPacket;
 import com.relimer.ironsrestrictions.network.spells.SyncPlayerRarityDataPacket;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
-import dev.kosmx.playerAnim.api.layered.AnimationStack;
-import dev.kosmx.playerAnim.api.layered.IAnimation;
-import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
-import dev.kosmx.playerAnim.api.layered.ModifierLayer;
-import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
-import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
-import dev.kosmx.playerAnim.core.util.Ease;
-import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
+import com.relimer.ironsrestrictions.registries.DataAttachmentRegistry;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +26,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RarityUpgrade extends Item {
@@ -58,31 +42,37 @@ public class RarityUpgrade extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand pUsedHand) {
         ItemStack itemStack = player.getItemInHand(pUsedHand);
-        if (level.isClientSide && player instanceof AbstractClientPlayer clientPlayer) {
-            if(shouldFail(0, 0, prevRarity, player, this)) {
-                return InteractionResultHolder.fail(itemStack);
-            }
-            Animations.play(clientPlayer, Animations.UPGRADE);
-        }
+        SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
+        SpellRarity currentRarity = rarityData.getRarity();
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            final int[] advCount = {0};
-            serverPlayer.server.getAdvancements().tree().nodes().stream().forEach(advancementHolder -> {
-                advancementHolder.advancement().display()
-                        .filter(displayInfo -> !displayInfo.isHidden())
-                        .ifPresent(displayInfo -> {
-                            if(serverPlayer.getAdvancements().getOrStartProgress(advancementHolder.holder()).isDone()) {
-                                advCount[0]++;
-                            }
-                        })
-                ;
-            }
-            );
-            if(shouldFail(advCount[0], requiredAdvancements, prevRarity, player, this)) {
+            if(player.getCooldowns().isOnCooldown(this)) {
                 return InteractionResultHolder.fail(itemStack);
             }
-            SyncedRarityData data = new SyncedRarityData(player);
-            data.setRarity(rarity);
-            PacketDistributor.sendToPlayer(serverPlayer, new SyncPlayerRarityDataPacket(data));
+            int value;
+            if(currentRarity == null) {
+                value = -1;
+            } else {
+                value = currentRarity.getValue();
+            }
+            int prevValue;
+            if(prevRarity == null) {
+                prevValue = -1;
+            } else {
+                prevValue = prevRarity.getValue();
+            }
+            if(value < prevValue){
+                player.displayClientMessage(Component.translatable("item.irons_restrictions.upgrade.fail_below").withStyle(ChatFormatting.DARK_RED), true);
+                return InteractionResultHolder.fail(itemStack);
+            }
+            if(value > prevValue){
+                player.displayClientMessage(Component.translatable("item.irons_restrictions.upgrade.fail_above").withStyle(ChatFormatting.DARK_RED), true);
+                return InteractionResultHolder.fail(itemStack);
+            }
+            player.playNotifySound(SoundEvents.TRIDENT_THUNDER.value(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
+            ((ServerLevel) level).sendParticles(ParticleTypes.ENCHANT, player.getX(), player.getY(), player.getZ(), 50, 0.5, 1, 0.5, 0.5);
+            rarityData.setRarity(rarity);
+            PacketDistributor.sendToPlayer(serverPlayer, new SyncPlayerRarityDataPacket(rarityData));
+            PacketDistributor.sendToPlayer(serverPlayer, new PlayAnimationPacket(Animations.UPGRADE));
 
             if (!serverPlayer.getAbilities().instabuild) {
                 itemStack.shrink(1);
@@ -91,9 +81,6 @@ public class RarityUpgrade extends Item {
             return InteractionResultHolder.success(itemStack);
         }
         return InteractionResultHolder.fail(itemStack);
-    }
-    private static boolean shouldFail(int advCount, int requiredAdvancements, SpellRarity prevRarity, Player player, Item item) {
-        return advCount < requiredAdvancements || ClientRarityData.getCurrentRarity() != prevRarity || player.getCooldowns().isOnCooldown(item);
     }
 
     @Override

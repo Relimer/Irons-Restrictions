@@ -129,6 +129,11 @@ dependencies {
     // CURIOS *****************************************************************************************************
     implementation "curse.maven:curios-309927:6529130"
 
+    // JEI ********************************************************************************************************
+    compileOnly "mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+
     // OPTIONAL
     // ALSHANEXS FAMILIARS
     implementation "maven.modrinth:alshanexs-familiars:1.21.1_v2.0_HotFix"

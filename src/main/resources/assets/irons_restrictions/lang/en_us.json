@@ -24,7 +24,14 @@
 
   "item.irons_restrictions.fragment": "Torn Scroll",
 
+  "item.irons_restrictions.common_upgrade": "Common Upgrade",
+  "item.irons_restrictions.uncommon_upgrade": "Uncommon Upgrade",
+  "item.irons_restrictions.rare_upgrade": "Rare Upgrade",
   "item.irons_restrictions.epic_upgrade": "Epic Upgrade",
+  "item.irons_restrictions.legendary_upgrade": "Legendary Upgrade",
+  "item.irons_restrictions.upgrade_desc": "Use to be able to cast Spells of this rarity",
+  "item.irons_restrictions.upgrade.fail_above": "You can already cast spells at this level",
+  "item.irons_restrictions.upgrade.fail_below": "Your current rarity is not strong enough to upgrade to this rarity",
 
 
   "item.irons_restrictions.sound_manuscript": "Sound Manuscript",

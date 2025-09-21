@@ -1,5 +1,7 @@
 package com.relimer.ironsrestrictions;
 
+import com.relimer.ironsrestrictions.util.ConfigurableRarity;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
@@ -38,6 +40,10 @@ public class Config {
             = BUILDER
             .comment("The chance for an Unfinished Manuscript to fail")
             .defineInRange("failChance", 0.3, 0.0, 1.0);
+    public static final ModConfigSpec.EnumValue<ConfigurableRarity> StartingRarity
+            = BUILDER
+            .comment("The default starting rarity, only applies to new players")
+            .defineEnum("startingRarity", ConfigurableRarity.RARE);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }

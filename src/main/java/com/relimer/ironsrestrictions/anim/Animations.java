@@ -17,6 +17,7 @@ public class Animations {
     public static final ResourceLocation ANIMATION_RESOURCE = ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "animation");
 
     public static final ResourceLocation UPGRADE = ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "upgrade");
+
     public static void  play(AbstractClientPlayer clientPlayer, ResourceLocation resourceLocation) {
         var rawanimation = PlayerAnimationRegistry.getAnimation(resourceLocation);
         if (rawanimation instanceof KeyframeAnimation keyframeAnimation) {

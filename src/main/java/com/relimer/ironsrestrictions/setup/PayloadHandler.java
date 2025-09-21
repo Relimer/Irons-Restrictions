@@ -17,6 +17,7 @@ public class PayloadHandler {
         final PayloadRegistrar payloadRegistrar = event.registrar(IronsRestrictions.MODID).versioned("1.0.0").optional();
         payloadRegistrar.playToClient(OpenSchoolScreenPacket.TYPE, OpenSchoolScreenPacket.STREAM_CODEC, OpenSchoolScreenPacket::handle);
         payloadRegistrar.playToClient(SyncPlayerRarityDataPacket.TYPE, SyncPlayerRarityDataPacket.STREAM_CODEC, SyncPlayerRarityDataPacket::handle);
+        payloadRegistrar.playToClient(PlayAnimationPacket.TYPE, PlayAnimationPacket.STREAM_CODEC, PlayAnimationPacket::handle);
 
         payloadRegistrar.playToServer(RLearnSpellPacket.TYPE, RLearnSpellPacket.STREAM_CODEC, RLearnSpellPacket::handle);
     }

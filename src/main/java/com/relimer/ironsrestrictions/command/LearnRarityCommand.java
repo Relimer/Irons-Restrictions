@@ -5,6 +5,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
 import com.relimer.ironsrestrictions.network.spells.SyncPlayerRarityDataPacket;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
+import com.relimer.ironsrestrictions.registries.DataAttachmentRegistry;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -28,17 +29,35 @@ public class LearnRarityCommand {
                             return set(context.getSource(), rarity);
                         })
                 ))
+                .then(Commands.literal("clear")
+                        .executes(context -> {
+                            return clear(context.getSource());
+                        })
+                )
         );
+    }
+    private static int clear(CommandSourceStack source) {
+        ServerPlayer player = source.getPlayer();
+
+        SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
+        rarityData.setRarity(null);
+
+        // Sync the data to the player
+        PacketDistributor.sendToPlayer(player, new SyncPlayerRarityDataPacket(rarityData));
+
+        source.sendSuccess(() -> source.getDisplayName().copy().append(" Cleared Rarity"), false);
+
+        return 1;
     }
 
     private static int set(CommandSourceStack source, SpellRarity rarity) {
         ServerPlayer player = source.getPlayer();
 
-        SyncedRarityData data = new SyncedRarityData(player);
-        data.setRarity(rarity);
+        SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
+        rarityData.setRarity(rarity);
 
         // Sync the data to the player
-        PacketDistributor.sendToPlayer(player, new SyncPlayerRarityDataPacket(data));
+        PacketDistributor.sendToPlayer(player, new SyncPlayerRarityDataPacket(rarityData));
 
         source.sendSuccess(() -> source.getDisplayName().copy().append(" set to rarity: " + rarity.name()), false);
 

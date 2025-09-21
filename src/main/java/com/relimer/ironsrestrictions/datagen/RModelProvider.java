@@ -27,7 +27,11 @@ public class RModelProvider extends ItemModelProvider {
                 .texture("layer2", ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "item/manuscript_overlay"));
         basicItem(ItemRegistry.FRAGMENT.get());
         basicItem(ItemRegistry.UNFINISHED_MANUSCRIPT.get());
+        basicItem(ItemRegistry.LEGENDARY_UPGRADE.get());
         basicItem(ItemRegistry.EPIC_UPGRADE.get());
+        basicItem(ItemRegistry.RARE_UPGRADE.get());
+        basicItem(ItemRegistry.UNCOMMON_UPGRADE.get());
+        basicItem(ItemRegistry.COMMON_UPGRADE.get());
 
 
         SchoolUtils.getLoopSchools().forEach(holder -> {

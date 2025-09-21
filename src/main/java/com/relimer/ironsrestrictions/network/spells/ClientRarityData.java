@@ -1,12 +1,13 @@
 package com.relimer.ironsrestrictions.network.spells;
 
+import com.relimer.ironsrestrictions.Config;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import net.minecraft.client.Minecraft;
 
 public class ClientRarityData {
 
     // The synced rarity for the local player
-    private static SpellRarity currentRarity = SpellRarity.COMMON; // Default
+    private static SpellRarity currentRarity = Config.StartingRarity.get().getSpellRarity(); // Default
 
     public static SpellRarity getCurrentRarity() {
         return currentRarity;

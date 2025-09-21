@@ -2,6 +2,8 @@ package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
+import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
+import com.relimer.ironsrestrictions.registries.DataAttachmentRegistry;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.item.Scroll;
@@ -55,7 +57,12 @@ public class AbstractSpellMixin {
     private boolean irons_Restrictions$hasUnlockedRarity(AbstractSpell abstractSpell, int spellLevel, Player player) {
         SpellRarity rarity = abstractSpell.getRarity(spellLevel);
         int minLevel = abstractSpell.getMinLevelForRarity(rarity);
-        if(minLevel <= abstractSpell.getMinLevelForRarity(ClientRarityData.getCurrentRarity())) {
+        SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
+        SpellRarity currentRarity = rarityData.getRarity();
+        if(currentRarity == null) {
+            return irons_Restrictions$imbuedChecks(abstractSpell, player);
+        }
+        if(minLevel <= abstractSpell.getMinLevelForRarity(currentRarity)) {
             return true;
         }
 

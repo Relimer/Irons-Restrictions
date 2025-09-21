@@ -32,6 +32,7 @@ public class IronsRestrictions {
         LootModifierRegistry.register(modEventBus);
         LootConditionRegistry.register(modEventBus);
         ComponentRegistry.register(modEventBus);
+        DataAttachmentRegistry.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
