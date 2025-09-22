@@ -15,12 +15,24 @@
   "item.irons_restrictions.blood_manuscript_desc": "血の呪文を学ぶために使用する",
   "item.irons_restrictions.lightning_manuscript": "雷の写本",
   "item.irons_restrictions.lightning_manuscript_desc": "雷の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.manuscript.learn_scroll": "新しい呪文を修得した: ",
+
   "item.irons_restrictions.unfinished_manuscript": "不完全な写本",
   "item.irons_restrictions.unfinished_manuscript_desc": "使用するとランダムな呪文を修得出来る可能性がある",
   "item.irons_restrictions.unfinished_manuscript.full": "これ以上学べる呪文は無いようだ",
   "item.irons_restrictions.unfinished_manuscript.fail": "写本は塵に消えた...",
   "item.irons_restrictions.unfinished_manuscript.success": "新しい呪文を修得した: ",
   "item.irons_restrictions.fragment": "破れたスクロール",
+
+  "item.irons_restrictions.common_upgrade": "Common Upgrade",
+  "item.irons_restrictions.uncommon_upgrade": "Uncommon Upgrade",
+  "item.irons_restrictions.rare_upgrade": "Rare Upgrade",
+  "item.irons_restrictions.epic_upgrade": "Epic Upgrade",
+  "item.irons_restrictions.legendary_upgrade": "Legendary Upgrade",
+  "item.irons_restrictions.upgrade_desc": "Use to be able to cast Spells of this rarity",
+  "item.irons_restrictions.upgrade.fail_above": "You can already cast spells at this level",
+  "item.irons_restrictions.upgrade.fail_below": "Your current rarity is not strong enough to upgrade to this rarity",
 
 
   "item.irons_restrictions.sound_manuscript": "音の写本",
