@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PlayAnimationPacket implements CustomPacketPayload{
-    private static ResourceLocation animation;
+    final ResourceLocation animation;
     public static final CustomPacketPayload.Type<PlayAnimationPacket> TYPE = new PlayAnimationPacket.Type<>(ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "play_animation"));
     public static final StreamCodec<RegistryFriendlyByteBuf, PlayAnimationPacket> STREAM_CODEC = CustomPacketPayload.codec(PlayAnimationPacket::write, PlayAnimationPacket::new);
 
@@ -28,10 +28,7 @@ public class PlayAnimationPacket implements CustomPacketPayload{
     }
     public static void handle(PlayAnimationPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            AbstractClientPlayer clientPlayer = Minecraft.getInstance().player;
-            if (clientPlayer != null) {
-                Animations.play(clientPlayer, packet.animation);
-            }
+            ClientPacketHandlers.handlePlayAnimation(packet);
         });
     }
 

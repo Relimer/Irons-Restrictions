@@ -62,7 +62,6 @@ public class Manuscript extends Item {
                     data.learnSpell(spell);
                     IronsRestrictions.LOGGER.info(player.getName().getString() + " learnt Spell: " + spell);
                     serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.success").append(spell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
-                    PacketDistributor.sendToServer(new RLearnSpellPacket(pUsedHand, spell.getSpellId()));
                     player.playNotifySound(SoundRegistry.LEARN_ELDRITCH_SPELL.get(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
                     itemStack.shrink(1);
                     player.getCooldowns().addCooldown(scrollHand.getItem(), 20);
