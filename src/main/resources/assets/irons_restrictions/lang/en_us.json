@@ -16,6 +16,8 @@
   "item.irons_restrictions.lightning_manuscript": "Lightning Manuscript",
   "item.irons_restrictions.lightning_manuscript_desc": "Use to learn Lightning spells",
 
+  "item.irons_restrictions.manuscript.learn_scroll": "You learned a new spell: ",
+
   "item.irons_restrictions.unfinished_manuscript": "Unfinished Manuscript",
   "item.irons_restrictions.unfinished_manuscript_desc": "Use to have a chance at learning a random spell",
   "item.irons_restrictions.unfinished_manuscript.full": "You already know all available spells.",
