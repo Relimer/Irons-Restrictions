@@ -36,7 +36,7 @@ public class AbstractSpellMixin {
     private void onCanBeCastedBy(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
         AbstractSpell spell = (AbstractSpell) (Object) this;
         if (spell.requiresLearning() && redirectIsLearned(spell, player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
-            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.literal("You haven't unlocked this rarity yet!").withStyle(ChatFormatting.RED)));
+            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
         }
     }
 

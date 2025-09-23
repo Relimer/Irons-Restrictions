@@ -59,5 +59,7 @@
   "item.irons_restrictions.aqua_manuscript_desc": "Use to learn Aqua spells",
 
 
+  "ui.irons_restrictions.cast_error_rarity": "You haven't unlocked this rarity yet!",
+
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }
