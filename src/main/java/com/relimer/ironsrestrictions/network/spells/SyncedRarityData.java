@@ -1,6 +1,7 @@
 package com.relimer.ironsrestrictions.network.spells;
 
 import com.relimer.ironsrestrictions.Config;
+import com.relimer.ironsrestrictions.util.ConfigurableRarity;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -50,11 +51,11 @@ public class SyncedRarityData {
         this.livingEntity = livingEntity;
     }
     public void saveNBTData(CompoundTag compound, HolderLookup.Provider provider) {
-        compound.putString("spellRarity", rarity.name());
+        compound.putString("spellRarity", this.rarity != null ? this.rarity.name() : "NONE");
 
     }
     public void loadNBTData(CompoundTag compound, HolderLookup.Provider provider) {
-        this.rarity = SpellRarity.valueOf(compound.getString("spellRarity"));
+        this.rarity = ConfigurableRarity.valueOf(compound.getString("spellRarity")).getSpellRarity();
     }
 
     public SpellRarity getRarity() {

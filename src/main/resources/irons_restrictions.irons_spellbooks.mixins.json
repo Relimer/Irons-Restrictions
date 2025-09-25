@@ -4,11 +4,13 @@
   "refmap": "irons_restrictions.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "EldritchResearchScreenMixin",
     "AutomagicallyUnlearnSpells",
     "AbstractSpellMixin",
     "ArcaneAnvilMenuMixin",
     "ItemCombinerMenuAccessor"
+  ],
+  "client": [
+    "EldritchResearchScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

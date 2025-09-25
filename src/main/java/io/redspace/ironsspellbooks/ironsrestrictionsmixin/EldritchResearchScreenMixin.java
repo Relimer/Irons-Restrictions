@@ -4,12 +4,15 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.gui.EldritchResearchScreen;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(EldritchResearchScreen.class)
 public class EldritchResearchScreenMixin {
     @Shadow
