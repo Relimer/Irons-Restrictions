@@ -6,6 +6,7 @@ import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
 import com.relimer.ironsrestrictions.network.spells.SyncPlayerRarityDataPacket;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
 import com.relimer.ironsrestrictions.registries.DataAttachmentRegistry;
+import com.relimer.ironsrestrictions.util.ConfigurableRarity;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -23,41 +24,20 @@ public class LearnRarityCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralCommandNode<CommandSourceStack> command = dispatcher.register(Commands.literal("rarity")
                 .requires((p) -> p.hasPermission(2))
-                .then(Commands.literal("set").then(Commands.argument("rarity", EnumArgument.enumArgument(SpellRarity.class))
+                .then(Commands.literal("set").then(Commands.argument("rarity", EnumArgument.enumArgument(ConfigurableRarity.class))
                         .executes(context -> {
-                            SpellRarity rarity = context.getArgument("rarity", SpellRarity.class);
+                            ConfigurableRarity rarity = context.getArgument("rarity", ConfigurableRarity.class);
                             return set(context.getSource(), rarity);
                         })
                 ))
-                .then(Commands.literal("clear")
-                        .executes(context -> {
-                            return clear(context.getSource());
-                        })
-                )
         );
     }
-    private static int clear(CommandSourceStack source) {
+
+    private static int set(CommandSourceStack source, ConfigurableRarity rarity) {
         ServerPlayer player = source.getPlayer();
 
         SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
-        rarityData.setRarity(null);
-
-        // Sync the data to the player
-        PacketDistributor.sendToPlayer(player, new SyncPlayerRarityDataPacket(rarityData));
-
-        source.sendSuccess(() -> source.getDisplayName().copy().append(" Cleared Rarity"), false);
-
-        return 1;
-    }
-
-    private static int set(CommandSourceStack source, SpellRarity rarity) {
-        ServerPlayer player = source.getPlayer();
-
-        SyncedRarityData rarityData = player.getData(DataAttachmentRegistry.RARITY_DATA);
-        rarityData.setRarity(rarity);
-
-        // Sync the data to the player
-        PacketDistributor.sendToPlayer(player, new SyncPlayerRarityDataPacket(rarityData));
+        rarityData.setRarity(rarity.getSpellRarity());
 
         source.sendSuccess(() -> source.getDisplayName().copy().append(" set to rarity: " + rarity.name()), false);
 

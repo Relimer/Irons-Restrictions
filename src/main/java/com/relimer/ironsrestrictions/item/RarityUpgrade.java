@@ -71,7 +71,6 @@ public class RarityUpgrade extends Item {
             player.playNotifySound(SoundEvents.TRIDENT_THUNDER.value(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
             ((ServerLevel) level).sendParticles(ParticleTypes.ENCHANT, player.getX(), player.getY(), player.getZ(), 50, 0.5, 1, 0.5, 0.5);
             rarityData.setRarity(rarity);
-            PacketDistributor.sendToPlayer(serverPlayer, new SyncPlayerRarityDataPacket(rarityData));
             PacketDistributor.sendToPlayer(serverPlayer, new PlayAnimationPacket(Animations.UPGRADE));
 
             if (!serverPlayer.getAbilities().instabuild) {

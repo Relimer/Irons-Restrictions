@@ -63,13 +63,18 @@ public class SyncedRarityData {
     }
 
     public void setRarity(SpellRarity newRarity) {
-        rarity = newRarity;
-        doSync();
+        if (this.rarity != newRarity) {
+            rarity = newRarity;
+            doSync();
+        }
     }
     public void doSync() {
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(serverPlayer, new SyncPlayerRarityDataPacket(this));
         }
+    }
+    public void copyFrom(SyncedRarityData other) {
+        setRarity(other.getRarity());
     }
 
     public int getServerPlayerId() {

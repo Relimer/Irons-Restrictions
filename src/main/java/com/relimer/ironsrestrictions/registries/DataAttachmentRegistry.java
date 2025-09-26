@@ -17,7 +17,11 @@ public class DataAttachmentRegistry {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, IronsSpellbooks.MODID);
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<SyncedRarityData>> RARITY_DATA = ATTACHMENT_TYPES.register("rarity_data",
-            () -> AttachmentType.builder((holder) -> holder instanceof ServerPlayer serverPlayer ? new SyncedRarityData(serverPlayer) : new SyncedRarityData()).serialize(new PlayerRarityProvider()).build());
+            () -> AttachmentType.builder((holder) -> holder instanceof ServerPlayer serverPlayer ? new SyncedRarityData(serverPlayer) : new SyncedRarityData())
+                    .serialize(new PlayerRarityProvider())
+                    .copyOnDeath()
+                    .build()
+    );
 
 
     public static void register(IEventBus eventBus) {

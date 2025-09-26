@@ -20,5 +20,8 @@ public class ComponentRegistry {
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String pName, UnaryOperator<DataComponentType.Builder<T>> pBuilder) {
         return COMPONENTS.register(pName, () -> pBuilder.apply(DataComponentType.builder()).build());
     }
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SchoolContainer>> SCHOOL_COMPONENT = register("school_component", (builder) -> builder.persistent(SchoolContainer.CODEC).networkSynchronized(SchoolContainer.STREAM_CODEC).cacheEncoding());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SchoolContainer>> SCHOOL_COMPONENT = register("school_component", (builder) -> builder
+            .persistent(SchoolContainer.CODEC)
+            .networkSynchronized(SchoolContainer.STREAM_CODEC)
+            .cacheEncoding());
 }

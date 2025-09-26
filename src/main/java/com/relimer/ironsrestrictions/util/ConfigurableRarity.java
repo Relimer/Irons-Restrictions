@@ -1,5 +1,7 @@
 package com.relimer.ironsrestrictions.util;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import org.jetbrains.annotations.Nullable;
 
