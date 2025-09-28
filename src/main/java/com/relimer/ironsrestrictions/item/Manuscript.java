@@ -63,7 +63,9 @@ public class Manuscript extends Item {
                     IronsRestrictions.LOGGER.info(player.getName().getString() + " learnt Spell: " + spell);
                     serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.manuscript.learn_scroll").append(spell.getDisplayName(player).getString()).withStyle(ChatFormatting.GOLD), true);
                     player.playNotifySound(SoundRegistry.LEARN_ELDRITCH_SPELL.get(), SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);
-                    itemStack.shrink(1);
+                    if(!serverPlayer.gameMode.isCreative()) {
+                        itemStack.shrink(1);
+                    }
                     player.getCooldowns().addCooldown(scrollHand.getItem(), 20);
                     return InteractionResultHolder.success(itemStack);
                 }

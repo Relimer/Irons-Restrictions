@@ -82,7 +82,7 @@ public class UnfinishedManuscript extends Item {
                 return InteractionResultHolder.fail(itemStack);
             }
 
-            if (!serverPlayer.getAbilities().instabuild) {
+            if (!serverPlayer.gameMode.isCreative()) {
                 itemStack.shrink(1);
             }
             player.getCooldowns().addCooldown(this, 20);

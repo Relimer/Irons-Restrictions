@@ -45,7 +45,7 @@ public class RLearnSpellPacket implements CustomPacketPayload {
                 var data = MagicData.getPlayerMagicData(serverPlayer).getSyncedData();
                 if (spell != SpellRegistry.none() && !data.isSpellLearned(spell) && itemStack.is(ItemRegistry.MANUSCRIPT) && itemStack.getCount() > 0) {
                     data.learnSpell(spell);
-                    if (!serverPlayer.getAbilities().instabuild) {
+                    if (!serverPlayer.gameMode.isCreative()) {
                         itemStack.shrink(1);
                     }
                 }

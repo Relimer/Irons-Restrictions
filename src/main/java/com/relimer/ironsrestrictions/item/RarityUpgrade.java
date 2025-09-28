@@ -73,7 +73,7 @@ public class RarityUpgrade extends Item {
             rarityData.setRarity(rarity);
             PacketDistributor.sendToPlayer(serverPlayer, new PlayAnimationPacket(Animations.UPGRADE));
 
-            if (!serverPlayer.getAbilities().instabuild) {
+            if (!serverPlayer.gameMode.isCreative()) {
                 itemStack.shrink(1);
             }
             player.getCooldowns().addCooldown(this, 20);

@@ -58,6 +58,9 @@
   "item.irons_restrictions.aqua_manuscript": "Aqua Manuscript",
   "item.irons_restrictions.aqua_manuscript_desc": "Use to learn Aqua spells",
 
+  "item.irons_restrictions.geo_manuscript": "Geo Manuscript",
+  "item.irons_restrictions.geo_manuscript_desc": "Use to learn Geo spells",
+
 
   "ui.irons_restrictions.cast_error_rarity": "You haven't unlocked this rarity yet!",
 
