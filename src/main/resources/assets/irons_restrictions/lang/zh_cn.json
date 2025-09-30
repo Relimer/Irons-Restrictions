@@ -1,0 +1,99 @@
+{
+  "item.irons_restrictions.manuscript.learn_scroll": "你学会了新法术：",
+
+  "item.irons_restrictions.unfinished_manuscript.full": "你已掌握所有可学习的法术。",
+
+  "item.irons_restrictions.unfinished_manuscript.fail": "手稿化成了灰烬...",
+
+  "item.irons_restrictions.unfinished_manuscript.success": "你学会了新法术：",
+
+  "item.irons_restrictions.common_upgrade": "普通升级",
+
+  "item.irons_restrictions.uncommon_upgrade": "卓越升级",
+
+  "item.irons_restrictions.rare_upgrade": "稀有升级",
+
+  "item.irons_restrictions.epic_upgrade": "史诗升级",
+
+  "item.irons_restrictions.legendary_upgrade": "传说升级",
+
+  "item.irons_restrictions.upgrade_desc": "使用后可施放此稀有度的法术",
+
+  "item.irons_restrictions.upgrade.fail_above": "你已能施放此等级的法术",
+
+  "item.irons_restrictions.upgrade.fail_below": "你当前的稀有度不足以升级至此等级",
+
+  "item.irons_restrictions.technomancy_manuscript": "量子手稿",
+
+  "item.irons_restrictions.technomancy_manuscript_desc": "使用后可学习量子类法术",
+
+  "item.irons_restrictions.aqua_manuscript": "源流手稿",
+
+  "item.irons_restrictions.aqua_manuscript_desc": "使用后可学习源流法术",
+
+  "item.irons_restrictions.fire_manuscript": "炽焰手稿",
+
+  "item.irons_restrictions.fire_manuscript_desc": "使用后可学习炽焰法术",
+
+  "item.irons_restrictions.nature_manuscript": "自然手稿",
+
+  "item.irons_restrictions.nature_manuscript_desc": "使用后可学习自然法术",
+
+  "item.irons_restrictions.evocation_manuscript": "唤魔手稿",
+
+  "item.irons_restrictions.evocation_manuscript_desc": "使用后可学习唤魔法术",
+
+  "item.irons_restrictions.ender_manuscript": "末影手稿",
+
+  "item.irons_restrictions.ender_manuscript_desc": "使用后可学习末影法术",
+
+  "item.irons_restrictions.ice_manuscript": "冰霜手稿",
+
+  "item.irons_restrictions.ice_manuscript_desc": "使用后可学习冰霜法术",
+
+  "item.irons_restrictions.holy_manuscript": "神圣手稿",
+
+  "item.irons_restrictions.holy_manuscript_desc": "使用后可学习神圣法术",
+
+  "item.irons_restrictions.blood_manuscript": "猩红手稿",
+
+  "item.irons_restrictions.blood_manuscript_desc": "使用后可学习猩红法术",
+
+  "item.irons_restrictions.lightning_manuscript": "雷霆手稿",
+
+  "item.irons_restrictions.lightning_manuscript_desc": "使用后可学习雷霆法术",
+
+  "item.irons_restrictions.unfinished_manuscript": "知识手稿",
+
+  "item.irons_restrictions.unfinished_manuscript_desc": "使用后有几率随机学会一个法术",
+
+  "item.irons_restrictions.fragment": "破碎卷轴",
+
+  "item.irons_restrictions.sound_manuscript": "律灵手稿",
+
+  "item.irons_restrictions.sound_manuscript_desc": "使用后可学习律灵法术",
+
+  "item.irons_restrictions.abyssal_manuscript": "深渊手稿",
+
+  "item.irons_restrictions.abyssal_manuscript_desc": "使用后可学习深渊法术",
+
+  "item.irons_restrictions.symmetry_manuscript": "对称手稿",
+
+  "item.irons_restrictions.symmetry_manuscript_desc": "使用后可学习对称法术",
+
+  "item.irons_restrictions.spirit_manuscript": "魂灵手稿",
+
+  "item.irons_restrictions.spirit_manuscript_desc": "使用后可学习魂灵法术",
+
+  "item.irons_restrictions.dune_manuscript": "沙丘手稿",
+
+  "item.irons_restrictions.dune_manuscript_desc": "使用后可学习沙丘法术",
+
+  "item.irons_restrictions.wind_manuscript": "流风手稿",
+
+  "item.irons_restrictions.wind_manuscript_desc": "使用后可学习流风法术",
+
+  "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions 物品栏",
+
+  "ui.irons_restrictions.cast_error_rarity": "你尚未解锁该稀有度！"
+}
