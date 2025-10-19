@@ -15,12 +15,25 @@
   "item.irons_restrictions.blood_manuscript_desc": "血の呪文を学ぶために使用する",
   "item.irons_restrictions.lightning_manuscript": "雷の写本",
   "item.irons_restrictions.lightning_manuscript_desc": "雷の呪文を学ぶために使用する",
+
+  "item.irons_restrictions.manuscript.learn_scroll": "新しい呪文を修得した: ",
+
   "item.irons_restrictions.unfinished_manuscript": "不完全な写本",
-  "item.irons_restrictions.unfinished_manuscript_desc": "使用するとランダムな呪文を修得出来る可能性がある",
+  "item.irons_restrictions.unfinished_manuscript_desc": "使用することでランダムな呪文を修得できる可能性がある",
   "item.irons_restrictions.unfinished_manuscript.full": "これ以上学べる呪文は無いようだ",
   "item.irons_restrictions.unfinished_manuscript.fail": "写本は塵に消えた...",
   "item.irons_restrictions.unfinished_manuscript.success": "新しい呪文を修得した: ",
+
   "item.irons_restrictions.fragment": "破れたスクロール",
+
+  "item.irons_restrictions.common_upgrade": "コモンアップグレード",
+  "item.irons_restrictions.uncommon_upgrade": "アンコモンアップグレード",
+  "item.irons_restrictions.rare_upgrade": "レアアップグレード",
+  "item.irons_restrictions.epic_upgrade": "エピックアップグレード",
+  "item.irons_restrictions.legendary_upgrade": "レジェンダリーアップグレード",
+  "item.irons_restrictions.upgrade_desc": "使用することでこのレアリティの呪文を詠唱できるようになる",
+  "item.irons_restrictions.upgrade.fail_above": "すでにこのレアリティの呪文は詠唱できる",
+  "item.irons_restrictions.upgrade.fail_below": "使用するには下位のレアリティを開放している必要がある",
 
 
   "item.irons_restrictions.sound_manuscript": "音の写本",
@@ -31,10 +44,8 @@
 
   "item.irons_restrictions.symmetry_manuscript": "均衡の写本",
   "item.irons_restrictions.symmetry_manuscript_desc": "均衡の呪文を学ぶために使用する",
-
   "item.irons_restrictions.spirit_manuscript": "精霊の写本",
   "item.irons_restrictions.spirit_manuscript_desc": "精霊の呪文を学ぶために使用する",
-
   "item.irons_restrictions.dune_manuscript": "砂の写本",
   "item.irons_restrictions.dune_manuscript_desc": "砂の呪文を学ぶために使用する",
 
@@ -46,6 +57,9 @@
 
   "item.irons_restrictions.aqua_manuscript": "水の写本",
   "item.irons_restrictions.aqua_manuscript_desc": "水の呪文を学ぶために使用する",
+
+
+  "ui.irons_restrictions.cast_error_rarity": "まだこのレアリティを開放していない！",
 
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictionsのアイテム"
 }

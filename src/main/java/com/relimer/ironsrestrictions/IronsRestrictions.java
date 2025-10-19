@@ -27,7 +27,7 @@ public class IronsRestrictions {
 
     public IronsRestrictions(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
-        Messages.register();
+        modEventBus.addListener(this::commonSetup);
 
         ItemRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
@@ -35,6 +35,9 @@ public class IronsRestrictions {
         LootConditionRegistry.register(modEventBus);
 
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+    private void commonSetup(final net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent event) {
+        event.enqueueWork(Messages::register);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

@@ -2,7 +2,10 @@ package com.relimer.ironsrestrictions.setup;
 
 import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.OpenSchoolScreenPacket;
+import com.relimer.ironsrestrictions.network.PlayAnimationPacket;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
+import com.relimer.ironsrestrictions.network.spells.SyncPlayerRarityDataPacket;
+import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
 import io.redspace.ironsspellbooks.network.ServerboundLearnSpell;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,6 +38,17 @@ public class Messages {
                 .decoder(RLearnSpellPacket::new)
                 .encoder(RLearnSpellPacket::toBytes)
                 .consumerMainThread(RLearnSpellPacket::handle)
+                .add();
+
+        net.messageBuilder(SyncPlayerRarityDataPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SyncPlayerRarityDataPacket::new)
+                .encoder(SyncPlayerRarityDataPacket::toBytes)
+                .consumerMainThread(SyncPlayerRarityDataPacket::handle)
+                .add();
+        net.messageBuilder(PlayAnimationPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PlayAnimationPacket::new)
+                .encoder(PlayAnimationPacket::toBytes)
+                .consumerMainThread(PlayAnimationPacket::handle)
                 .add();
     }
     public static <MSG> void sendToServer(MSG message) {

@@ -1,6 +1,7 @@
 package com.relimer.ironsrestrictions;
 
 
+import com.relimer.ironsrestrictions.util.ConfigurableRarity;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
@@ -34,10 +35,18 @@ public class Config {
                     "irons_spellbooks:telekinesis",
                     "irons_spellbooks:eldritch_blast",
                     "irons_spellbooks:pocket_dimension"), value -> value instanceof String);
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> ExcludeLearntSpells = BUILDER
+            .comment("A list of spells that will not be able to be learnt through Manuscripts")
+            .defineList("excludeLearnSpells", List.of(
+                    "irons_spellbooks:heartstop"), value -> value instanceof String);
     public static final ForgeConfigSpec.DoubleValue FailChance
             = BUILDER
             .comment("The chance for an Unfinished Manuscript to fail")
             .defineInRange("failChance", 0.3, 0.0, 1.0);
+    public static final ForgeConfigSpec.EnumValue<ConfigurableRarity> StartingRarity
+            = BUILDER
+            .comment("The default starting rarity, only applies to new players")
+            .defineEnum("startingRarity", ConfigurableRarity.RARE);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 }

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "uuid": "33b912f8-0aa0-45e6-a2d4-9b5677e6f35c",
+  "name": "upgrade",
+  "_comment1": "Converted from KosmX animation.model.use_upgrade_start",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 50,
+    "stopTick": 50,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": false,
+    "moves": [
+      {
+        "tick": 0,
+        "easing": "INQUAD",
+        "body": {
+          "y": 0,
+          "x": 0,
+          "z": 0
+        },
+        "head": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightArm": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "leftArm": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightLeg": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "leftLeg": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      },
+      {
+        "tick": 20,
+        "easing": "OUTQUAD",
+        "body": {
+          "y": 0.5,
+          "x": 0,
+          "z": 0
+        },
+        "head": {
+          "pitch": -0.3054,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightArm": {
+          "pitch": -1.5241,
+          "yaw": -0.4361,
+          "roll": -0.0125
+        },
+        "leftArm": {
+          "pitch": -1.5243,
+          "yaw": 0.3927,
+          "roll": 0.0181
+        },
+        "rightLeg": {
+          "pitch": 0.2182,
+          "yaw": 0,
+          "roll": 0.2618
+        },
+        "leftLeg": {
+          "pitch": 0.2125,
+          "yaw": 0.0449,
+          "roll": -0.2581
+        }
+      },
+      {
+        "tick": 30,
+        "easing": "OUTQUAD",
+        "body": {
+          "y": 0.5,
+          "x": 0,
+          "z": 0
+        },
+        "head": {
+          "pitch": -0.3054,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightArm": {
+          "pitch": -1.5241,
+          "yaw": -0.4361,
+          "roll": -0.0125
+        },
+        "leftArm": {
+          "pitch": -1.5243,
+          "yaw": 0.3927,
+          "roll": 0.0181
+        },
+        "rightLeg": {
+          "pitch": 0.2182,
+          "yaw": 0,
+          "roll": 0.2618
+        },
+        "leftLeg": {
+          "pitch": 0.2125,
+          "yaw": 0.0449,
+          "roll": -0.2581
+        }
+      },
+      {
+        "tick": 50,
+        "easing": "OUTQUAD",
+        "body": {
+          "y": 0,
+          "x": 0,
+          "z": 0
+        },
+        "head": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightArm": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "leftArm": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "rightLeg": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        },
+        "leftLeg": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    ]
+  }
+}

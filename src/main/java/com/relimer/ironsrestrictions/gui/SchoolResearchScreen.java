@@ -6,6 +6,7 @@ import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.setup.Messages;
+import com.relimer.ironsrestrictions.util.SpellUtils;
 import com.relimer.ironsrestrictions.util.TextureUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -81,7 +82,7 @@ public class SchoolResearchScreen extends Screen {
 
     protected void init() {
 
-        learnableSpells = SpellRegistry.getEnabledSpells().stream().filter(spell -> spell.getSchoolType().equals(school)).toList();
+        learnableSpells = SpellUtils.getLearnableSpells().stream().filter(spell -> spell.getSchoolType().equals(school)).toList();
         if (this.minecraft != null) {
             playerData = ClientMagicData.getSyncedSpellData(minecraft.player);
         }

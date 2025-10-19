@@ -16,6 +16,8 @@
   "item.irons_restrictions.lightning_manuscript": "Lightning Manuscript",
   "item.irons_restrictions.lightning_manuscript_desc": "Use to learn Lightning spells",
 
+  "item.irons_restrictions.manuscript.learn_scroll": "You learned a new spell: ",
+
   "item.irons_restrictions.unfinished_manuscript": "Unfinished Manuscript",
   "item.irons_restrictions.unfinished_manuscript_desc": "Use to have a chance at learning a random spell",
   "item.irons_restrictions.unfinished_manuscript.full": "You already know all available spells.",
@@ -23,6 +25,15 @@
   "item.irons_restrictions.unfinished_manuscript.success": "You learned a new spell: ",
 
   "item.irons_restrictions.fragment": "Torn Scroll",
+
+  "item.irons_restrictions.common_upgrade": "Common Upgrade",
+  "item.irons_restrictions.uncommon_upgrade": "Uncommon Upgrade",
+  "item.irons_restrictions.rare_upgrade": "Rare Upgrade",
+  "item.irons_restrictions.epic_upgrade": "Epic Upgrade",
+  "item.irons_restrictions.legendary_upgrade": "Legendary Upgrade",
+  "item.irons_restrictions.upgrade_desc": "Use to be able to cast Spells of this rarity",
+  "item.irons_restrictions.upgrade.fail_above": "You can already cast spells at this level",
+  "item.irons_restrictions.upgrade.fail_below": "Your current rarity is not strong enough to upgrade to this rarity",
 
 
   "item.irons_restrictions.sound_manuscript": "Sound Manuscript",
@@ -49,6 +60,9 @@
 
   "item.irons_restrictions.geo_manuscript": "Geo Manuscript",
   "item.irons_restrictions.geo_manuscript_desc": "Use to learn Geo spells",
+
+
+  "ui.irons_restrictions.cast_error_rarity": "You haven't unlocked this rarity yet!",
 
   "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restrictions Items"
 }

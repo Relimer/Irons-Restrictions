@@ -38,6 +38,11 @@ public class CreativeTabRegistry {
             });
             event.accept(ItemRegistry.FRAGMENT.get());
             event.accept(ItemRegistry.UNFINISHED_MANUSCRIPT.get());
+            event.accept(ItemRegistry.COMMON_UPGRADE.get());
+            event.accept(ItemRegistry.UNCOMMON_UPGRADE.get());
+            event.accept(ItemRegistry.RARE_UPGRADE.get());
+            event.accept(ItemRegistry.EPIC_UPGRADE.get());
+            event.accept(ItemRegistry.LEGENDARY_UPGRADE.get());
         }
     }
 }

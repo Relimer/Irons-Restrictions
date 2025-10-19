@@ -2,6 +2,9 @@ package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.compat.FallenGemsAffixSpellCastTrigger;
+import com.relimer.ironsrestrictions.network.RarityData;
+import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
+import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.item.Scroll;
@@ -12,11 +15,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,6 +34,7 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 @Mixin(AbstractSpell.class)
@@ -46,7 +52,11 @@ public abstract class AbstractSpellMixin {
 
     @Inject(method = "canBeCastedBy", at = @At("HEAD"), cancellable = true, remap = false)
     public void canBeCastedBy(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
-        if (needsLearning() && !learnedOrImbued(((AbstractSpell) (Object) this), player)) {
+        AbstractSpell spell = (AbstractSpell) (Object) this;
+        if (needsLearning() && learnedOrImbued(spell, player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
+            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
+        }
+        if (needsLearning() && !learnedOrImbued(spell, player)) {
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_unlearned").withStyle(ChatFormatting.RED)));
         }
     }
@@ -85,6 +95,48 @@ public abstract class AbstractSpellMixin {
             return FallenGemsAffixSpellCastTrigger.getter(player);
         }
 
+        return false;
+    }
+    @Unique
+    private boolean irons_Restrictions$hasUnlockedRarity(AbstractSpell abstractSpell, int spellLevel, Player player) {
+        SpellRarity rarity = abstractSpell.getRarity(spellLevel);
+        int minLevel = abstractSpell.getMinLevelForRarity(rarity);
+        RarityData rarityData = player.getCapability(PlayerRarityProvider.SYNCED_RARITY).orElse(new RarityData(((ServerPlayer) player)));
+        SpellRarity currentRarity = rarityData.getSyncedData().getRarity();
+        if(currentRarity == null) {
+            return irons_Restrictions$imbuedChecks(abstractSpell, player);
+        }
+        if(minLevel <= abstractSpell.getMinLevelForRarity(currentRarity)) {
+            return true;
+        }
+
+        return irons_Restrictions$imbuedChecks(abstractSpell, player);
+    }
+    @Unique
+    private boolean irons_Restrictions$imbuedChecks(AbstractSpell spell, Player player) {
+        for (InteractionHand hand : InteractionHand.values()) {
+            ItemStack held = player.getItemInHand(hand);
+            if (irons_Restrictions$isSpellImbued(held, spell)) {
+                return true;
+            }
+        }
+        for (ItemStack armorItem : player.getArmorSlots()) {
+            if (irons_Restrictions$isSpellImbued(armorItem, spell)) {
+                return true;
+            }
+        }
+        Optional<ICuriosItemHandler> curiosHandlerOpt = CuriosApi.getCuriosInventory(player).resolve();
+        if (curiosHandlerOpt.isPresent()) {
+            ICuriosItemHandler handler = curiosHandlerOpt.get();
+            for (Map.Entry<String, ICurioStacksHandler> entry : handler.getCurios().entrySet()) {
+                for (int i = 0; i < entry.getValue().getSlots(); i++) {
+                    ItemStack curioStack = entry.getValue().getStacks().getStackInSlot(i);
+                    if (irons_Restrictions$isSpellImbued(curioStack, spell)) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
