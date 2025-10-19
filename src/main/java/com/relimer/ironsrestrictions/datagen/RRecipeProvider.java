@@ -26,5 +26,30 @@ public class RRecipeProvider extends RecipeProvider {
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.MAGIC_CLOTH.get(), 4)
                 .unlockedBy("has_fragment", has(ItemRegistry.FRAGMENT.get()))
                 .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "unfinished_manuscript"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COMMON_UPGRADE.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_COMMON.get(), 4)
+                .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "common_upgrade"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.UNCOMMON_UPGRADE.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_UNCOMMON.get(), 4)
+                .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "uncommon_upgrade"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.RARE_UPGRADE.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_RARE.get(), 4)
+                .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "rare_upgrade"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COMMON_UPGRADE.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_EPIC.get(), 4)
+                .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "epic_upgrade"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COMMON_UPGRADE.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_LEGENDARY.get(), 4)
+                .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "legendary_upgrade"));
     }
 }

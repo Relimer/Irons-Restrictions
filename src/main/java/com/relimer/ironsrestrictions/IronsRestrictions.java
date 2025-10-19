@@ -1,9 +1,9 @@
 package com.relimer.ironsrestrictions;
-import com.relimer.ironsrestrictions.registries.CreativeTabRegistry;
-import com.relimer.ironsrestrictions.registries.ItemRegistry;
-import com.relimer.ironsrestrictions.registries.LootConditionRegistry;
-import com.relimer.ironsrestrictions.registries.LootModifierRegistry;
+import com.relimer.ironsrestrictions.registries.*;
 import com.relimer.ironsrestrictions.setup.Messages;
+import io.redspace.ironsspellbooks.block.alchemist_cauldron.AlchemistCauldronRecipe;
+import io.redspace.ironsspellbooks.block.alchemist_cauldron.AlchemistCauldronRecipeRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -38,7 +38,7 @@ public class IronsRestrictions {
     }
     private void commonSetup(final net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent event) {
         event.enqueueWork(Messages::register);
-    }
+        }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
