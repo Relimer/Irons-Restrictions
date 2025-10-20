@@ -41,12 +41,12 @@ public class RRecipeProvider extends RecipeProvider {
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_RARE.get(), 4)
                 .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
                 .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "rare_upgrade"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COMMON_UPGRADE.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.EPIC_UPGRADE.get())
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_EPIC.get(), 4)
                 .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
                 .save(pWriter, ResourceLocation.fromNamespaceAndPath(IronsRestrictions.MODID, "epic_upgrade"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COMMON_UPGRADE.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.LEGENDARY_UPGRADE.get())
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.INK_LEGENDARY.get(), 4)
                 .unlockedBy("has_orb", has(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
