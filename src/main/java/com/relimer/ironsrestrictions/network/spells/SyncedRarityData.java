@@ -18,7 +18,7 @@ public class SyncedRarityData {
     private @Nullable LivingEntity livingEntity;
 
 
-    private SpellRarity rarity;
+    private ConfigurableRarity rarity;
 
     private SyncedRarityData syncedRarityData;
 
@@ -26,7 +26,7 @@ public class SyncedRarityData {
     public SyncedRarityData(int serverPlayerId) {
         this.serverPlayerId = serverPlayerId;
         this.livingEntity = null;
-        this.rarity = Config.StartingRarity.get().getSpellRarity();
+        this.rarity = Config.StartingRarity.get();
     }
 
     //server
@@ -47,19 +47,19 @@ public class SyncedRarityData {
         public SyncedRarityData read(FriendlyByteBuf buffer) {
             var data = new SyncedRarityData(buffer.readInt());
             if (buffer.readBoolean()) {
-                data.rarity = buffer.readEnum(SpellRarity.class);
+                data.rarity = buffer.readEnum(ConfigurableRarity.class);
             } else {
-                data.rarity = Config.StartingRarity.get().getSpellRarity();
+                data.rarity = Config.StartingRarity.get();
             }
             return data;
         }
     };
 
-    public SpellRarity getRarity() {
+    public ConfigurableRarity getRarity() {
         return rarity;
     }
 
-    public void setRarity(SpellRarity newRarity) {
+    public void setRarity(ConfigurableRarity newRarity) {
         if (this.rarity != newRarity) {
             rarity = newRarity;
             doSync();
@@ -88,7 +88,7 @@ public class SyncedRarityData {
         compound.putString("spell_rarity", this.rarity.toString());
     }
     public void loadNBTData(CompoundTag compound) {
-        this.rarity = SpellRarity.valueOf(compound.getString("spell_rarity"));
+        this.rarity = ConfigurableRarity.valueOf(compound.getString("spell_rarity"));
     }
 
 }

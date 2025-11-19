@@ -27,7 +27,7 @@ public class LearnRarityCommand {
         ServerPlayer player = source.getPlayer();
 
         player.getCapability(PlayerRarityProvider.SYNCED_RARITY).ifPresent(rarityData -> {
-            rarityData.getSyncedData().setRarity(rarity.getSpellRarity());
+            rarityData.getSyncedData().setRarity(rarity);
         });
 
         source.sendSuccess(() -> source.getDisplayName().copy().append(" set to rarity: " + rarity.name()), false);

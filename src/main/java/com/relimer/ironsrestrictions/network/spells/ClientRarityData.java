@@ -24,7 +24,7 @@ public class ClientRarityData {
 
 
     public static SpellRarity getRarity() {
-        return playerRarityData.getSyncedData().getRarity();
+        return playerRarityData.getSyncedData().getRarity().getSpellRarity();
     }
 
 

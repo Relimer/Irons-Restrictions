@@ -6,6 +6,7 @@ import com.relimer.ironsrestrictions.network.RarityData;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
 import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
 import com.relimer.ironsrestrictions.setup.Messages;
+import com.relimer.ironsrestrictions.util.ConfigurableRarity;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
@@ -30,10 +31,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class RarityUpgrade extends Item {
-    SpellRarity rarity;
+    ConfigurableRarity rarity;
     SpellRarity prevRarity;
     int requiredAdvancements;
-    public RarityUpgrade(SpellRarity rarity, SpellRarity previousRarity, int reqAdv) {
+    public RarityUpgrade(ConfigurableRarity rarity, SpellRarity previousRarity, int reqAdv) {
         super(new Properties().rarity(Rarity.EPIC).stacksTo(1));
         this.rarity = rarity;
         this.prevRarity = previousRarity;
@@ -45,7 +46,7 @@ public class RarityUpgrade extends Item {
         ItemStack itemStack = player.getItemInHand(pUsedHand);
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             RarityData rarityData = player.getCapability(PlayerRarityProvider.SYNCED_RARITY).orElse(new RarityData(serverPlayer));
-            SpellRarity currentRarity = rarityData.getSyncedData().getRarity();
+            SpellRarity currentRarity = rarityData.getSyncedData().getRarity().getSpellRarity();
             if(player.getCooldowns().isOnCooldown(this)) {
                 return InteractionResultHolder.fail(itemStack);
             }

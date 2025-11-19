@@ -102,7 +102,7 @@ public abstract class AbstractSpellMixin {
         SpellRarity rarity = abstractSpell.getRarity(spellLevel);
         int minLevel = abstractSpell.getMinLevelForRarity(rarity);
         RarityData rarityData = player.getCapability(PlayerRarityProvider.SYNCED_RARITY).orElse(new RarityData(((ServerPlayer) player)));
-        SpellRarity currentRarity = rarityData.getSyncedData().getRarity();
+        SpellRarity currentRarity = rarityData.getSyncedData().getRarity().getSpellRarity();
         if(currentRarity == null) {
             return irons_Restrictions$imbuedChecks(abstractSpell, player);
         }
