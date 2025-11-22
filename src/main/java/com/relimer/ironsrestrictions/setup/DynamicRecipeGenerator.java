@@ -33,6 +33,9 @@ public class DynamicRecipeGenerator {
             ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(
                     IronsRestrictions.MODID, school.getId().getPath() + "_manuscript"
             );
+            if(newRecipes.stream().anyMatch(recipeHolder -> recipeHolder.id().equals(recipeId))) {
+                return;
+            }
 
             List<String> pattern = List.of(
                     " A ",
@@ -41,17 +44,17 @@ public class DynamicRecipeGenerator {
             );
             Map<Character, Ingredient> key = Map.of(
                     'A', Ingredient.of(ItemRegistry.FRAGMENT.get()),
-                    'B', Ingredient.of(school.getFocus()) // assuming this returns an Ingredient
+                    'B', Ingredient.of(school.getFocus())
             );
             ItemStack output = new ItemStack(ItemRegistry.MANUSCRIPT);
             output.set(ComponentRegistry.SCHOOL_COMPONENT, new SchoolContainer(school));
             ShapedRecipePattern shapedPattern = ShapedRecipePattern.of(key, pattern);
             ShapedRecipe recipe = new ShapedRecipe(
-                    "manuscripts",                   // Group (used in recipe book)
-                    CraftingBookCategory.MISC,       // Category
-                    shapedPattern,                   // The pattern
-                    output,                          // The resulting ItemStack
-                    false                            // Show notification on unlock
+                    "manuscripts",
+                    CraftingBookCategory.MISC,
+                    shapedPattern,
+                    output,
+                    false
             );
             Recipe<?> myRecipe = recipe;
             RecipeHolder<?> newHolder = new RecipeHolder<>(recipeId, myRecipe);

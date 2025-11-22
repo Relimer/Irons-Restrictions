@@ -139,10 +139,10 @@ dependencies {
     implementation "maven.modrinth:alshanexs-familiars:1.21.1_v2.0_HotFix"
 
     // CATACLYSM: SPELLBOOKS
-    //implementation "maven.modrinth:cataclysm-spellbooks:1.1.7-1.21"
-    //implementation "maven.modrinth:azurelib:3.0.27"
-    //implementation "maven.modrinth:l_enders-cataclysm:3.15"
-    //implementation "maven.modrinth:lionfish-api:2.6"
+    implementation "maven.modrinth:cataclysm-spellbooks:1.1.7-1.21"
+    implementation "maven.modrinth:azurelib:3.0.27"
+    implementation "maven.modrinth:l_enders-cataclysm:3.15"
+    implementation "maven.modrinth:lionfish-api:2.6"
 
     // MAGIC FROM THE EAST
     implementation "curse.maven:magic-from-the-east-1224162:6864551"
