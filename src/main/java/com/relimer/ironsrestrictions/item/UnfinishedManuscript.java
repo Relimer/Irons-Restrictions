@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.spells.NoneSpell;
 import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -45,20 +46,28 @@ public class UnfinishedManuscript extends Item {
             double failureChance = Config.FailChance.get();
 
             List<? extends String> spellIds = Config.ExcludeRandomLearntSpells.get();
-            var learnableSpells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream().filter(spell -> !spell.isLearned(player)).toList());
+            List<AbstractSpell> spellList = new ArrayList<>();
+            List<AbstractSpell> learnableSpells;
             for (String spellId : spellIds) {
                 String namespace = spellId.split(":")[0];
                 String path = spellId.split(":")[1];
                 try {
                     ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
                     AbstractSpell spell = SpellRegistry.getSpell(id);
-                    if (spell != null) {
-                        learnableSpells.remove(spell);
+                    if (spell != null && !(spell instanceof NoneSpell)) {
+                        spellList.add(spell);
                     }
                 } catch (Exception ignore) {
                 }
             }
-
+            if(Config.InvertedUnfinishedManuscript.get()) {
+                learnableSpells = spellList.stream().filter(spell -> !spell.isLearned(player)).toList();
+            }
+            else {
+                learnableSpells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream()
+                        .filter(spell -> !spellList.contains(spell))
+                        .filter(spell -> !spell.isLearned(player)).toList());
+            }
             if (learnableSpells.isEmpty()) {
                 serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.full"), true);
                 player.playNotifySound(SoundEvents.FLINTANDSTEEL_USE, SoundSource.MASTER, 1f, Utils.random.nextIntBetweenInclusive(9, 11) * .1f);

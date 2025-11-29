@@ -21,16 +21,27 @@ public class PlayerJoinHandler {
         if (player.level().isClientSide()) return;
         MagicData magicData = MagicData.getPlayerMagicData(player);
         List<? extends String> spellIds = Config.DefaultLearntSpells.get();
+        List<AbstractSpell> abstractSpells = new java.util.ArrayList<>(List.of());
         for (String spellId : spellIds) {
             String namespace = spellId.split(":")[0];
             String path = spellId.split(":")[1];
             try {
                 ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
                 AbstractSpell spell = SpellRegistry.getSpell(id);
-                if (spell != null && !magicData.getSyncedData().isSpellLearned(spell)) {
-                    magicData.getSyncedData().learnSpell(spell);
-                }
+                abstractSpells.add(spell);
             } catch (Exception ignore) {
+            }
+        }
+        List<AbstractSpell> spellList;
+        if(Config.InvertedDefaultLearntSpells.get()) {
+            spellList = SpellRegistry.getEnabledSpells().stream().filter(spell -> !abstractSpells.contains(spell)).toList();
+        }
+        else {
+            spellList = abstractSpells;
+        }
+        for(AbstractSpell spell : spellList) {
+            if (spell != null && !magicData.getSyncedData().isSpellLearned(spell)) {
+                magicData.getSyncedData().learnSpell(spell);
             }
         }
     }
