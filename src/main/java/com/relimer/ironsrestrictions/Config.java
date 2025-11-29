@@ -20,12 +20,18 @@ public class Config {
     public static final ModConfigSpec.BooleanValue ImbuedItemsRequireLearning = BUILDER
             .comment("If true, to use a spell on an imbued item, the spell must be learnt")
             .define("imbuedItemsRequireLearning", false);
+
+    public static final ModConfigSpec.BooleanValue InvertedDefaultLearntSpells = BUILDER
+            .comment("The spells listed in the defaultLearntSpells, will instead be the only spells that are not learnt by default")
+            .define("invertDefaultSpells", false);
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DefaultLearntSpells = BUILDER
             .comment("A list of spells that the player will already know")
             .defineList("defaultLearntSpells", List.of(
                     "irons_spellbooks:firebolt",
                     "irons_spellbooks:icicle"), value -> value instanceof String);
-
+    public static final ModConfigSpec.BooleanValue InvertedUnfinishedManuscript = BUILDER
+            .comment("The spells listed in the excludeRandomLearntSpells, will instead be the only spells that can be learnt from the Unfinished Manuscript")
+            .define("invertUnfinishedManuscript", false);
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ExcludeRandomLearntSpells = BUILDER
             .comment("A list of spells that will not be able to be learnt through the Unfinished Manuscript")
             .defineList("excludeRandomLearntSpells", List.of(

@@ -43,7 +43,8 @@ public class UnfinishedManuscript extends Item {
             double failureChance = Config.FailChance.getAsDouble();
 
             List<? extends String> spellIds = Config.ExcludeRandomLearntSpells.get();
-            var learnableSpells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream().filter(spell -> !spell.isLearned(player)).toList());
+            ArrayList<AbstractSpell> spellList = new ArrayList<>(List.of());
+            ArrayList<AbstractSpell> learnableSpells = new ArrayList<>(List.of());
             for (String spellId : spellIds) {
                 String namespace = spellId.split(":")[0];
                 String path = spellId.split(":")[1];
@@ -51,11 +52,21 @@ public class UnfinishedManuscript extends Item {
                     ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
                     AbstractSpell spell = SpellRegistry.getSpell(id);
                     if (spell != null) {
+                        spellList.add(spell);
                         learnableSpells.remove(spell);
                     }
                 } catch (Exception ignore) {
                 }
             }
+            if(Config.InvertedUnfinishedManuscript.get()) {
+                learnableSpells = new ArrayList<>(spellList.stream().filter(spell -> !spell.isLearned(player)).toList());
+            }
+            else {
+                learnableSpells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream().filter(spell -> !spell.isLearned(player)).toList());
+                learnableSpells.removeAll(spellList);
+            }
+
+
 
             if (learnableSpells.isEmpty()) {
                 serverPlayer.displayClientMessage(Component.translatable("item.irons_restrictions.unfinished_manuscript.full"), true);
