@@ -3,7 +3,6 @@ package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 import com.relimer.ironsrestrictions.Config;
 import com.relimer.ironsrestrictions.compat.FallenGemsAffixSpellCastTrigger;
 import com.relimer.ironsrestrictions.network.RarityData;
-import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
 import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
@@ -21,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,7 +42,7 @@ public abstract class AbstractSpellMixin {
     @Shadow(remap = false)
     public abstract boolean isLearned(Player player);
     @Shadow(remap = false)
-    public abstract boolean needsLearning();
+    public abstract boolean requiresLearning();
     @Shadow(remap = false)
     public abstract String getComponentId();
 
@@ -53,17 +51,19 @@ public abstract class AbstractSpellMixin {
     @Inject(method = "canBeCastedBy", at = @At("HEAD"), cancellable = true, remap = false)
     public void canBeCastedBy(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
         AbstractSpell spell = (AbstractSpell) (Object) this;
-        if (needsLearning() && learnedOrImbued(spell, player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
-            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
-        }
-        if (needsLearning() && !learnedOrImbued(spell, player)) {
+        if(Config.ImbuedItemsRequireLearning.get().equals(true) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_unlearned").withStyle(ChatFormatting.RED)));
+        } else if (Config.ImbuedItemsRequireLearning.get().equals(false) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
+            cir.setReturnValue((new CastResult(CastResult.Type.SUCCESS)));
+        }
+        if (requiresLearning() && isLearned(player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
+            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
         }
     }
 
-    private boolean learnedOrImbued(AbstractSpell spell, Player player) {
+    @Unique
+    private boolean ironsSpells_nSpellbooksRestrictions$imbued(AbstractSpell spell, Player player) {
         if (player == null) return false;
-        if (spell.isLearned(player)) return true;
 
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack held = player.getItemInHand(hand);
@@ -97,6 +97,7 @@ public abstract class AbstractSpellMixin {
 
         return false;
     }
+
     @Unique
     private boolean irons_Restrictions$hasUnlockedRarity(AbstractSpell abstractSpell, int spellLevel, Player player) {
         SpellRarity rarity = abstractSpell.getRarity(spellLevel);
@@ -142,13 +143,13 @@ public abstract class AbstractSpellMixin {
 
     @Unique
     private boolean irons_Restrictions$isSpellImbued(ItemStack itemStack, AbstractSpell abstractSpell) {
-        if (itemStack.getItem() instanceof SpellBook || itemStack.getItem() instanceof Scroll || Config.ImbuedItemsRequireLearning.get().equals(true)) {
+        if (itemStack.getItem() instanceof SpellBook || itemStack.getItem() instanceof Scroll) {
             return false;
         }
         if (ISpellContainer.isSpellContainer(itemStack)) {
             ISpellContainer container = ISpellContainer.get(itemStack);
             if (container != null) {
-                for (SpellData spellSlot : container.getAllSpells()) {
+                for (SpellSlot spellSlot : container.getAllSpells()) {
                     if (spellSlot.getSpell() == abstractSpell) {
                         return true;
                     }
@@ -168,7 +169,7 @@ public abstract class AbstractSpellMixin {
 
     @Inject(method = "obfuscateStats", at = @At("HEAD"), cancellable = true, remap = false)
     private void overrideObfuscateStats(@Nullable Player player, CallbackInfoReturnable<Boolean> cir) {
-        boolean result = needsLearning() && !isLearned(player);
+        boolean result = requiresLearning() && !isLearned(player);
         cir.setReturnValue(result);
     }
     @Inject(method = "isLearned", at = @At("HEAD"), cancellable = true, remap = false)
@@ -183,7 +184,7 @@ public abstract class AbstractSpellMixin {
         }
     }
 
-    @Inject(method = "needsLearning", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "requiresLearning", at = @At("HEAD"), cancellable = true, remap = false)
     public void overrideNeedsLearning(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(true);
     }

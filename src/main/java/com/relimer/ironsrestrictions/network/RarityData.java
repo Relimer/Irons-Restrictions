@@ -3,17 +3,10 @@ package com.relimer.ironsrestrictions.network;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
 import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
 import com.relimer.ironsrestrictions.util.ConfigurableRarity;
-import io.redspace.ironsspellbooks.api.entity.IMagicEntity;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
-import io.redspace.ironsspellbooks.capabilities.magic.PlayerMagicProvider;
-import io.redspace.ironsspellbooks.capabilities.magic.PlayerRecasts;
-import io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class RarityData {
     private ServerPlayer serverPlayer = null;

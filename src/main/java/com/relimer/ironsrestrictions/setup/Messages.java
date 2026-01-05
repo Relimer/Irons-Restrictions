@@ -5,8 +5,6 @@ import com.relimer.ironsrestrictions.network.OpenSchoolScreenPacket;
 import com.relimer.ironsrestrictions.network.PlayAnimationPacket;
 import com.relimer.ironsrestrictions.network.spells.RLearnSpellPacket;
 import com.relimer.ironsrestrictions.network.spells.SyncPlayerRarityDataPacket;
-import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
-import io.redspace.ironsspellbooks.network.ServerboundLearnSpell;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
