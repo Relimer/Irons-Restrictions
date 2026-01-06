@@ -32,6 +32,7 @@ public class DynamicRecipeGenerator {
             ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(
                     IronsRestrictions.MODID, holder.getId().getPath() + "_manuscript"
             );
+            IronsRestrictions.LOGGER.info("IRONS RESTRICTIONS RECIPE: " + recipeId);
             ItemStack output = new ItemStack(ItemRegistry.MANUSCRIPT.get());
             ManuscriptData.setSchoolContainer(output, new SchoolContainer(holder));
             NonNullList<Ingredient> ingredients = NonNullList.withSize(9, Ingredient.EMPTY);
@@ -53,7 +54,9 @@ public class DynamicRecipeGenerator {
                     output,
                     false
             );
-            newRecipes.add(recipe);
+            if (!newRecipes.contains(recipe)) {
+                newRecipes.add(recipe);
+            }
         });
         recipeManager.replaceRecipes(newRecipes);
     }
