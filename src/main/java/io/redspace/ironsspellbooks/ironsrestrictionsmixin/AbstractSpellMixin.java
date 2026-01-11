@@ -6,6 +6,7 @@ import com.relimer.ironsrestrictions.network.RarityData;
 import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.config.ServerConfigs;
 import io.redspace.ironsspellbooks.item.Scroll;
 import io.redspace.ironsspellbooks.item.SpellBook;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
@@ -51,10 +52,14 @@ public abstract class AbstractSpellMixin {
     @Inject(method = "canBeCastedBy", at = @At("HEAD"), cancellable = true, remap = false)
     public void canBeCastedBy(int spellLevel, CastSource castSource, MagicData playerMagicData, Player player, CallbackInfoReturnable<CastResult> cir) {
         AbstractSpell spell = (AbstractSpell) (Object) this;
-        if(Config.ImbuedItemsRequireLearning.get().equals(true) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
+        float playerMana = playerMagicData.getMana();
+        boolean hasEnoughMana = playerMana - (float)spell.getManaCost(spellLevel) >= 0.0F;
+        boolean isSpellOnCooldown = playerMagicData.getPlayerCooldowns().isOnCooldown(spell);
+        boolean hasRecastForSpell = playerMagicData.getPlayerRecasts().hasRecastForSpell(spell.getSpellId());
+        if(Config.ImbuedItemsRequireLearning.get().equals(true) && !isLearned(player) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_unlearned").withStyle(ChatFormatting.RED)));
-        } else if (Config.ImbuedItemsRequireLearning.get().equals(false) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
-            cir.setReturnValue((new CastResult(CastResult.Type.SUCCESS)));
+        } else if (Config.ImbuedItemsRequireLearning.get().equals(false) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player) && (!isSpellOnCooldown || player.isCreative() && !(Boolean)ServerConfigs.CREATIVE_COOLDOWN.get())) {
+            cir.setReturnValue((hasRecastForSpell || !castSource.consumesMana() || hasEnoughMana || player.isCreative() && !(Boolean) ServerConfigs.CREATIVE_MANA_COST.get() ? new CastResult(CastResult.Type.SUCCESS) : new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_mana", new Object[]{spell.getDisplayName(player)}).withStyle(ChatFormatting.RED))));
         }
         if (requiresLearning() && isLearned(player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
