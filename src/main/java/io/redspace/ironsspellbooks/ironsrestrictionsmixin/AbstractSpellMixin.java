@@ -63,7 +63,7 @@ public abstract class AbstractSpellMixin {
 
     @Unique
     private boolean ironsSpells_nSpellbooksRestrictions$imbued(AbstractSpell spell, Player player) {
-        if (player == null) return false;
+        if (player == null || spell == null) return false;
 
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack held = player.getItemInHand(hand);
@@ -148,7 +148,7 @@ public abstract class AbstractSpellMixin {
         }
         if (ISpellContainer.isSpellContainer(itemStack)) {
             ISpellContainer container = ISpellContainer.get(itemStack);
-            if (container != null) {
+            if (container != null && !container.isEmpty()) {
                 for (SpellSlot spellSlot : container.getAllSpells()) {
                     if (spellSlot.getSpell() == abstractSpell) {
                         return true;
