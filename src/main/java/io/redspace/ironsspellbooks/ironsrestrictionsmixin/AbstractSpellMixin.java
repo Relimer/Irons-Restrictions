@@ -1,6 +1,7 @@
 package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
 import com.relimer.ironsrestrictions.Config;
+import com.relimer.ironsrestrictions.IronsRestrictions;
 import com.relimer.ironsrestrictions.compat.FallenGemsAffixSpellCastTrigger;
 import com.relimer.ironsrestrictions.network.RarityData;
 import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
@@ -56,12 +57,23 @@ public abstract class AbstractSpellMixin {
         boolean hasEnoughMana = playerMana - (float)spell.getManaCost(spellLevel) >= 0.0F;
         boolean isSpellOnCooldown = playerMagicData.getPlayerCooldowns().isOnCooldown(spell);
         boolean hasRecastForSpell = playerMagicData.getPlayerRecasts().hasRecastForSpell(spell.getSpellId());
-        if(Config.ImbuedItemsRequireLearning.get().equals(true) && !isLearned(player) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
+        IronsRestrictions.LOGGER.debug("Config: Imbued Learning: " + Config.ImbuedItemsRequireLearning.get().toString());
+        IronsRestrictions.LOGGER.debug("Is Learnt: " + isLearned(player));
+        IronsRestrictions.LOGGER.debug("Is Imbued: " + ironsSpells_nSpellbooksRestrictions$imbued(spell, player));
+        IronsRestrictions.LOGGER.debug("Config: Imbued Rarity: " + Config.ImbuedItemsRequireRarity.get().toString());
+        IronsRestrictions.LOGGER.debug("Has Rarity: " + irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player));
+        if(Config.ImbuedItemsRequireLearning.get() && !isLearned(player) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
+            IronsRestrictions.LOGGER.debug("FAILURE: NOT LEARNT IMBUED");
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_unlearned").withStyle(ChatFormatting.RED)));
-        } else if (Config.ImbuedItemsRequireLearning.get().equals(false) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player) && (!isSpellOnCooldown || player.isCreative() && !(Boolean)ServerConfigs.CREATIVE_COOLDOWN.get())) {
+        }
+        else if(Config.ImbuedItemsRequireRarity.get() && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player) && ironsSpells_nSpellbooksRestrictions$imbued(spell, player)) {
+            IronsRestrictions.LOGGER.debug("FAILURE: NOT RARITY IMBUED");
+            cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
+        }
+        else if (ironsSpells_nSpellbooksRestrictions$imbued(spell, player) && (!isSpellOnCooldown || player.isCreative() && !(Boolean)ServerConfigs.CREATIVE_COOLDOWN.get())) {
             cir.setReturnValue((hasRecastForSpell || !castSource.consumesMana() || hasEnoughMana || player.isCreative() && !(Boolean) ServerConfigs.CREATIVE_MANA_COST.get() ? new CastResult(CastResult.Type.SUCCESS) : new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_spellbooks.cast_error_mana", new Object[]{spell.getDisplayName(player)}).withStyle(ChatFormatting.RED))));
         }
-        if (requiresLearning() && isLearned(player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
+        else if (isLearned(player) && !irons_Restrictions$hasUnlockedRarity(spell, spellLevel, player)) {
             cir.setReturnValue(new CastResult(CastResult.Type.FAILURE, Component.translatable("ui.irons_restrictions.cast_error_rarity").withStyle(ChatFormatting.RED)));
         }
     }
@@ -110,13 +122,13 @@ public abstract class AbstractSpellMixin {
         RarityData rarityData = player.getCapability(PlayerRarityProvider.SYNCED_RARITY).orElse(new RarityData(((ServerPlayer) player)));
         SpellRarity currentRarity = rarityData.getSyncedData().getRarity().getSpellRarity();
         if(currentRarity == null) {
-            return irons_Restrictions$imbuedChecks(abstractSpell, player);
+            return (irons_Restrictions$imbuedChecks(abstractSpell, player) && !Config.ImbuedItemsRequireRarity.get());
         }
         if(minLevel <= abstractSpell.getMinLevelForRarity(currentRarity)) {
             return true;
         }
 
-        return irons_Restrictions$imbuedChecks(abstractSpell, player);
+        return (irons_Restrictions$imbuedChecks(abstractSpell, player) && !Config.ImbuedItemsRequireRarity.get());
     }
     @Unique
     private boolean irons_Restrictions$imbuedChecks(AbstractSpell spell, Player player) {

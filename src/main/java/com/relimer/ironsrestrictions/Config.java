@@ -19,6 +19,9 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue ImbuedItemsRequireLearning = BUILDER
             .comment("If true, to use a spell on an imbued item, the spell must be learnt")
             .define("imbuedItemsRequireLearning", false);
+    public static final ForgeConfigSpec.BooleanValue ImbuedItemsRequireRarity = BUILDER
+            .comment("If true, to use a spell on an imbued item, the rarity of the spell must be gained")
+            .define("imbuedItemsRequireRarity", false);
 
     public static final ForgeConfigSpec.BooleanValue InvertedDefaultLearntSpells = BUILDER
             .comment("The spells listed in the defaultLearntSpells, will instead be the only spells that are not learnt by default")
