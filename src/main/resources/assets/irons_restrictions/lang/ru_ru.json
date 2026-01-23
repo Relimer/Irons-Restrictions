@@ -1,0 +1,69 @@
+{
+  "item.irons_restrictions.fire_manuscript": "Манускрипт Огня",
+  "item.irons_restrictions.fire_manuscript_desc": "Используйте, чтобы изучить заклинания Огня",
+  "item.irons_restrictions.nature_manuscript": "Манускрипт Природы",
+  "item.irons_restrictions.nature_manuscript_desc": "Используйте, чтобы изучить заклинания Природы",
+  "item.irons_restrictions.evocation_manuscript": "Манускрипт Заклятий",
+  "item.irons_restrictions.evocation_manuscript_desc": "Используйте, чтобы изучить заклинания Заклятий",
+  "item.irons_restrictions.ender_manuscript": "Манускрипт Эндера",
+  "item.irons_restrictions.ender_manuscript_desc": "Используйте, чтобы изучить заклинания Эндера",
+  "item.irons_restrictions.ice_manuscript": "Манускрипт Льда",
+  "item.irons_restrictions.ice_manuscript_desc": "Используйте, чтобы изучить заклинания Льда",
+  "item.irons_restrictions.holy_manuscript": "Манускрипт Света",
+  "item.irons_restrictions.holy_manuscript_desc": "Используйте, чтобы изучить заклинания Света",
+  "item.irons_restrictions.blood_manuscript": "Манускрипт Крови",
+  "item.irons_restrictions.blood_manuscript_desc": "Используйте, чтобы изучить заклинания Крови",
+  "item.irons_restrictions.lightning_manuscript": "Манускрипт Молнии",
+  "item.irons_restrictions.lightning_manuscript_desc": "Используйте, чтобы изучить заклинания Молнии",
+
+  "item.irons_restrictions.manuscript.learn_scroll": "Вы изучили новое заклинание: ",
+
+  "item.irons_restrictions.unfinished_manuscript": "Незавершённый манускрипт",
+  "item.irons_restrictions.unfinished_manuscript_desc": "Используйте, чтобы получить шанс изучить случайное заклинание",
+  "item.irons_restrictions.unfinished_manuscript.full": "Вы уже знаете все доступные заклинания.",
+  "item.irons_restrictions.unfinished_manuscript.fail": "Манускрипт рассыпается в пыль...",
+  "item.irons_restrictions.unfinished_manuscript.success": "Вы изучили новое заклинание: ",
+
+  "item.irons_restrictions.fragment": "Фрагмент свитка",
+
+  "item.irons_restrictions.common_upgrade": "Обычное улучшение",
+  "item.irons_restrictions.uncommon_upgrade": "Необычное улучшение",
+  "item.irons_restrictions.rare_upgrade": "Редкое улучшение",
+  "item.irons_restrictions.epic_upgrade": "Эпическое улучшение",
+  "item.irons_restrictions.legendary_upgrade": "Легендарное улучшение",
+  "item.irons_restrictions.upgrade_desc": "Используйте, чтобы получить возможность применять заклинания этой редкости",
+  "item.irons_restrictions.upgrade.fail_above": "Вы уже можете применять заклинания этого уровня",
+  "item.irons_restrictions.upgrade.fail_below": "Ваша текущая редкость недостаточно сильна для улучшения до этой редкости",
+
+  "item.irons_restrictions.sound_manuscript": "Манускрипт Звука",
+  "item.irons_restrictions.sound_manuscript_desc": "Используйте, чтобы изучить заклинания Звука",
+
+  "item.irons_restrictions.abyssal_manuscript": "Манускрипт Бездны",
+  "item.irons_restrictions.abyssal_manuscript_desc": "Используйте, чтобы изучить заклинания Бездны",
+
+  "item.irons_restrictions.symmetry_manuscript": "Манускрипт Симметрии",
+  "item.irons_restrictions.symmetry_manuscript_desc": "Используйте, чтобы изучить заклинания Симметрии",
+  "item.irons_restrictions.spirit_manuscript": "Манускрипт Духа",
+  "item.irons_restrictions.spirit_manuscript_desc": "Используйте, чтобы изучить заклинания Духа",
+  "item.irons_restrictions.dune_manuscript": "Манускрипт Дюн",
+  "item.irons_restrictions.dune_manuscript_desc": "Используйте, чтобы изучить заклинания Дюн",
+
+  "item.irons_restrictions.wind_manuscript": "Манускрипт Ветра",
+  "item.irons_restrictions.wind_manuscript_desc": "Используйте, чтобы изучить заклинания Ветра",
+
+  "item.irons_restrictions.technomancy_manuscript": "Манускрипт Техномантии",
+  "item.irons_restrictions.technomancy_manuscript_desc": "Используйте, чтобы изучить заклинания Техномантии",
+
+  "item.irons_restrictions.aqua_manuscript": "Манускрипт Воды",
+  "item.irons_restrictions.aqua_manuscript_desc": "Используйте, чтобы изучить заклинания Воды",
+
+  "item.irons_restrictions.geo_manuscript": "Манускрипт Гео",
+  "item.irons_restrictions.geo_manuscript_desc": "Используйте, чтобы изучить заклинания Гео",
+
+  "item.irons_restrictions.blade_manuscript": "Манускрипт Клинков",
+  "item.irons_restrictions.blade_manuscript_desc": "Используйте, чтобы изучить заклинания Клинков",
+
+  "ui.irons_restrictions.cast_error_rarity": "Вы ещё не разблокировали эту редкость!",
+
+  "itemGroup.irons_restrictions.restrictions_items_tab": "Предметы Iron's Restrictions"
+}
