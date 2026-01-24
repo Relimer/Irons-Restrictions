@@ -187,6 +187,10 @@ public abstract class AbstractSpellMixin {
     @Inject(method = "obfuscateStats", at = @At("HEAD"), cancellable = true, remap = false)
     private void overrideObfuscateStats(@Nullable Player player, CallbackInfoReturnable<Boolean> cir) {
         boolean result = requiresLearning() && !isLearned(player);
+        AbstractSpell spell = (AbstractSpell) (Object) this;
+        if(!Config.ImbuedItemsObfuscate.get()) {
+            result = result && ironsSpells_nSpellbooksRestrictions$imbued(spell, player);
+        }
         cir.setReturnValue(result);
     }
     @Inject(method = "isLearned", at = @At("HEAD"), cancellable = true, remap = false)
