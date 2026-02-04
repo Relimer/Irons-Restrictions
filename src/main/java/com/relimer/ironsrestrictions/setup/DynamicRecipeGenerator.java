@@ -5,7 +5,6 @@ import com.relimer.ironsrestrictions.item.ManuscriptData;
 import com.relimer.ironsrestrictions.registries.ItemRegistry;
 import com.relimer.ironsrestrictions.util.SchoolContainer;
 import com.relimer.ironsrestrictions.util.SchoolUtils;
-import io.redspace.ironsspellbooks.ironsrestrictionsmixin.SchoolTypeAccessorMixin;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -37,7 +36,7 @@ public class DynamicRecipeGenerator {
             ManuscriptData.setSchoolContainer(output, new SchoolContainer(holder));
             NonNullList<Ingredient> ingredients = NonNullList.withSize(9, Ingredient.EMPTY);
             Ingredient A = Ingredient.of(ItemRegistry.FRAGMENT.get());
-            Ingredient B = Ingredient.of(((SchoolTypeAccessorMixin) holder).getFocus());
+            Ingredient B = Ingredient.of(holder.getFocus());
 
             ingredients.set(1, A);
             ingredients.set(3, A);

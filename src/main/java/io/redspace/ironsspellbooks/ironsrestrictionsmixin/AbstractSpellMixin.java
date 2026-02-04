@@ -39,13 +39,13 @@ import java.util.Optional;
 
 @Mixin(AbstractSpell.class)
 public abstract class AbstractSpellMixin {
-    @Shadow(remap = false)
+    @Shadow
     public abstract boolean obfuscateStats(Player player);
-    @Shadow(remap = false)
+    @Shadow
     public abstract boolean isLearned(Player player);
-    @Shadow(remap = false)
+    @Shadow
     public abstract boolean requiresLearning();
-    @Shadow(remap = false)
+    @Shadow
     public abstract String getComponentId();
 
     private static final Style ELDRITCH_OBFUSCATED_STYLE = Style.EMPTY.withObfuscated(true).withFont(ResourceLocation.withDefaultNamespace("alt"));

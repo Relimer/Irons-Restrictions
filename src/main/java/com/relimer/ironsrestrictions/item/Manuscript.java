@@ -7,6 +7,7 @@ import com.relimer.ironsrestrictions.util.SchoolContainer;
 import com.relimer.ironsrestrictions.util.SchoolUtils;
 import com.relimer.ironsrestrictions.util.SpellUtils;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
@@ -57,7 +58,7 @@ public class Manuscript extends Item {
                 var spellSlot = ISpellContainer.getOrCreate(scrollHand).getSpellAtIndex(0);
                 var spell = spellSlot.getSpell();
                 var school = spell.getSchoolType();
-                if(school == schoolComponent.getSchoolType() && !spell.isLearned(player) && SpellUtils.getLearnableSpells().contains(spell)) {
+                if(school == schoolComponent.getSchoolType() && !spell.isLearned(player) && SpellRegistry.getEnabledSpells().stream().filter((abstractSpell) -> !SpellUtils.getIgnoredSpells().contains(abstractSpell)).toList().contains(spell)) {
                     var data = MagicData.getPlayerMagicData(serverPlayer).getSyncedData();
                     data.learnSpell(spell);
                     IronsRestrictions.LOGGER.info(player.getName().getString() + " learnt Spell: " + spell);

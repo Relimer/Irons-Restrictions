@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpellUtils {
-    public static List<AbstractSpell> getLearnableSpells() {
-        var spells = new ArrayList<>(SpellRegistry.getEnabledSpells().stream().toList());
+    public static List<AbstractSpell> getIgnoredSpells() {
         List<? extends String> spellIds = Config.ExcludeLearntSpells.get();
+
+        List<AbstractSpell> ignoredSpells = new ArrayList<>();
         for (String spellId : spellIds) {
             String namespace = spellId.split(":")[0];
             String path = spellId.split(":")[1];
@@ -19,11 +20,11 @@ public class SpellUtils {
                 ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
                 AbstractSpell spell = SpellRegistry.getSpell(id);
                 if (spell != null) {
-                    spells.remove(spell);
+                    ignoredSpells.add(spell);
                 }
             } catch (Exception ignore) {
             }
         }
-        return spells;
+        return ignoredSpells;
     }
 }

@@ -9,6 +9,7 @@ import com.relimer.ironsrestrictions.setup.Messages;
 import com.relimer.ironsrestrictions.util.SpellUtils;
 import com.relimer.ironsrestrictions.util.TextureUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
@@ -69,7 +70,7 @@ public class SchoolResearchScreen extends Screen {
     }
 
     List<AbstractSpell> learnableSpells;
-    List<SpellNode> nodes;
+    List<SpellNode> nodes = new ArrayList<>();
     SyncedSpellData playerData;
     Vec2 maxViewportOffset;
     Vec2 viewportOffset;
@@ -81,36 +82,36 @@ public class SchoolResearchScreen extends Screen {
     static final int TIME_TO_HOLD = 15;
 
     protected void init() {
-
-        learnableSpells = SpellUtils.getLearnableSpells().stream().filter(spell -> spell.getSchoolType().equals(school)).toList();
+        this.learnableSpells = SpellRegistry.getEnabledSpells().stream().filter((spell) -> spell.getSchoolType().equals(school) && !SpellUtils.getIgnoredSpells().contains(spell)).toList();
         if (this.minecraft != null) {
             playerData = ClientMagicData.getSyncedSpellData(minecraft.player);
         }
         viewportOffset = Vec2.ZERO;
         this.leftPos = (this.width - WINDOW_WIDTH) / 2;
         this.topPos = (this.height - WINDOW_HEIGHT) / 2;
-        nodes = new ArrayList<>();
 
-        float f = Mth.TWO_PI / 6; // current angel between nodes
-        float r = 35; // current radius
-        float circumference = 0; // tracked length of current ring
-        float offset = 0.5f; // angular offset of this ring
-        float a = offset; // running angle
-        for (AbstractSpell learnableSpell : learnableSpells) {
-            if (circumference > r * Mth.TWO_PI) {
-                r += 40;
-                f = 35 / r;
+        float f = Mth.TWO_PI / 6;
+        float r = 35;
+        float circumference = 0;
+        float offset = 0.5f;
+        float a = offset;
+        for(int i = 0; i < this.learnableSpells.size(); ++i) {
+            if (circumference > r * ((float)Math.PI * 2F)) {
+                r += 40.0F;
+                f = 35.0F / r;
                 a -= f;
-                circumference = 0;
+                circumference = 0.0F;
             }
+
             a += f;
-            int x = leftPos + WINDOW_WIDTH / 2 - 8 + (int) (r * Mth.cos(a));
-            int y = topPos + WINDOW_HEIGHT / 2 - 8 + (int) (r * Mth.sin(a));
-            nodes.add(new SpellNode(learnableSpell, x, y));
-            circumference += r * f * 1.1f;
+            int x = this.leftPos + 126 - 8 + (int)(r * Mth.cos(a));
+            int y = this.topPos + 128 - 8 + (int)(r * Mth.sin(a));
+            this.nodes.add(new SpellNode((AbstractSpell)this.learnableSpells.get(i), x, y));
+            circumference += r * f * 1.1F;
         }
         float maxDistX = 0;
         float maxDistY = 0;
+
         for (int i = 0; i < nodes.size(); i++) {
             for (int j = 1; j < nodes.size(); j++) {
                 int x = Math.abs(nodes.get(i).x - nodes.get(j).x);
@@ -381,7 +382,7 @@ public class SchoolResearchScreen extends Screen {
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        if (this.isMouseDragging) {
+        if (this.isMouseDragging && maxViewportOffset != null) {
             float newX = viewportOffset.x + (float) dragX;
             float newY = viewportOffset.y + (float) dragY;
 

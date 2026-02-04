@@ -1,37 +1,28 @@
 package io.redspace.ironsspellbooks.ironsrestrictionsmixin;
 
-import com.relimer.ironsrestrictions.Config;
-import com.relimer.ironsrestrictions.IronsRestrictions;
-import com.relimer.ironsrestrictions.network.ClientPacketHandlers;
-import com.relimer.ironsrestrictions.network.RarityData;
 import com.relimer.ironsrestrictions.network.spells.ClientRarityData;
 import com.relimer.ironsrestrictions.network.spells.SyncedRarityData;
-import com.relimer.ironsrestrictions.player.PlayerRarityProvider;
+import com.relimer.ironsrestrictions.util.ItemCombinerMenuAccessor;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.gui.arcane_anvil.ArcaneAnvilMenu;
 import io.redspace.ironsspellbooks.item.Scroll;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.rmi.registry.Registry;
 
 
 @Mixin(ArcaneAnvilMenu.class)
 public abstract class ArcaneAnvilMenuMixin {
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void beforeCreateResult(CallbackInfo ci) {
-        ItemCombinerMenuAccessor accessor = (ItemCombinerMenuAccessor) (Object) this;
+        ItemCombinerMenuAccessor accessor = (ItemCombinerMenuAccessor) this;
         Player player = accessor.getPlayer();
         Container inputSlots = accessor.getInputSlots();
         ItemStack baseItem = inputSlots.getItem(0);

@@ -13,7 +13,6 @@ base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 jarJar.enable()
@@ -91,18 +90,17 @@ dependencies {
     }
 
     // IRONSSPELLBOOKS ********************************************************************************************
-    //implementation fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${irons_spells_version}")
     implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:7402504")
 
     // GECKOLIB ***************************************************************************************************
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${geckolib_version}")
+    implementation fg.deobf("curse.maven:geckolib-388172:7553267")
 
     // CAELUS *****************************************************************************************************
     compileOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}")
 
     // PLAYER ANIMATOR ********************************************************************************************
-    implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_version}")
+    implementation fg.deobf("curse.maven:playeranimator-658587:4587214")
 
 
     // JEI ********************************************************************************************************
@@ -111,8 +109,7 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_mc_version}-forge:${jei_version}")
 
     // CURIOS *****************************************************************************************************
-    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    implementation fg.deobf("curse.maven:curios-309927:6418456")
 
     // FALLEN GEMS & AFFIXES
     implementation fg.deobf("curse.maven:fallen-gems-affixes-1286177:6914468")
@@ -142,6 +139,16 @@ dependencies {
 
     //LIONFISH
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
+
+    //DARK DOPPELGANGER
+    implementation fg.deobf("curse.maven:dark-doppelganger-1110803:7423479")
+
+    //SPELLS GONE WRONG
+    implementation fg.deobf("curse.maven:spells-gone-wrong-1009162:7235219")
+    implementation fg.deobf("curse.maven:jinxedlib-1203401:6630668")
+
+    //ILLAGE AND SPILLAGE RESPILLAGED
+    implementation fg.deobf("curse.maven:illage-and-spillage-finally-ported-1079714:6156035")
 
     // JSON ******************************************************************************************************
     implementation "com.google.code.gson:gson:${gson_version}"
@@ -179,7 +186,7 @@ jar {
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "${mod_id}.irons_spellbooks.mixins.json"
+                "MixinConfigs"            : "${mod_id}.mixins.json"
         ])
     }
     from(sourceSets.main.output) {
@@ -225,14 +232,8 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-    options.compilerArgs += [
-            "-AreobfMixin=true",
-            "-Amixin.defaultObfuscationEnv=searge",
-            "-Amixin.refmap=${mod_id}.refmap.json"
-    ]
 }
-
 mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.irons_spellbooks.mixins.json"
+    add sourceSets.main, 'irons_restrictions.refmap.json'
+    config 'irons_restrictions.mixins.json'
 }

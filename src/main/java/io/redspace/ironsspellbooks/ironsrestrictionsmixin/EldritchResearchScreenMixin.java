@@ -13,8 +13,6 @@ import java.util.List;
 
 @Mixin(EldritchResearchScreen.class)
 public class EldritchResearchScreenMixin {
-    @Shadow
-    List<AbstractSpell> learnableSpells;
 
 
     @ModifyExpressionValue(

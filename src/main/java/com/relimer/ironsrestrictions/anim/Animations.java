@@ -21,17 +21,17 @@ public class Animations {
     public static void  play(AbstractClientPlayer clientPlayer, ResourceLocation resourceLocation) {
         var rawanimation = PlayerAnimationRegistry.getAnimation(resourceLocation);
         if (rawanimation instanceof KeyframeAnimation) {
-            var playerAnimationData = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData(clientPlayer).get(Animations.ANIMATION_RESOURCE);
-            if (playerAnimationData != null) {
-                var animation = new KeyframeAnimationPlayer(rawanimation) {
+            //var playerAnimationData = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData(clientPlayer).get(Animations.ANIMATION_RESOURCE);
+            //if (playerAnimationData != null) {
+                //var animation = new KeyframeAnimationPlayer(rawanimation) {
 
-                    @Override
-                    public void tick() {
-                        super.tick();
-                    }
-                };
-                playerAnimationData.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(2, Ease.INOUTSINE), animation, true);
-            }
+                    //@Override
+                    //public void tick() {
+                    //    super.tick();
+                    //}
+                //};
+                //playerAnimationData.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(2, Ease.INOUTSINE), animation, true);
+            //}
         }
     }
 }
