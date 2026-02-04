@@ -17,7 +17,6 @@ public class PlayerRarityEvents {
     @SubscribeEvent
     public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof ServerPlayer serverPlayer && !event.getCapabilities().containsKey(ID)) {
-            IronsRestrictions.LOGGER.info("[ISS RESTRICTIONS] Attached Capability to player {}", serverPlayer.getUUID());
             event.addCapability(ID, new PlayerRarityProvider(serverPlayer));
         }
     }
