@@ -61,6 +61,9 @@
   "item.irons_restrictions.geo_manuscript": "Geo Manuscript",
   "item.irons_restrictions.geo_manuscript_desc": "Use to learn Geo spells",
 
+  "item.irons_restrictions.blade_manuscript": "Blade Manuscript",
+  "item.irons_restrictions.blade_manuscript_desc": "Use to learn Blade spells",
+
 
   "ui.irons_restrictions.cast_error_rarity": "You haven't unlocked this rarity yet!",
 

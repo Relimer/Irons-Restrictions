@@ -1,0 +1,71 @@
+{
+  "item.irons_restrictions.fire_manuscript": "Flamme Manuskript",
+  "item.irons_restrictions.fire_manuscript_desc": "Bruk for å lære Flamme trolldom",
+  "item.irons_restrictions.nature_manuscript": "Natur Manuskript",
+  "item.irons_restrictions.nature_manuscript_desc": "Bruk for å lære Natur trolldom",
+  "item.irons_restrictions.evocation_manuscript": "Fremmaning Manuskript",
+  "item.irons_restrictions.evocation_manuscript_desc": "Bruk for å lære Fremmaning trolldom",
+  "item.irons_restrictions.ender_manuscript": "Ender Manuskript",
+  "item.irons_restrictions.ender_manuscript_desc": "Bruk for å lære Ender trolldom",
+  "item.irons_restrictions.ice_manuscript": "Is Manuskript",
+  "item.irons_restrictions.ice_manuscript_desc": "Bruk for å lære Is trolldom",
+  "item.irons_restrictions.holy_manuscript": "Hellig Manuskript",
+  "item.irons_restrictions.holy_manuscript_desc": "Bruk for å lære Hellig trolldom",
+  "item.irons_restrictions.blood_manuscript": "Blod Manuskript",
+  "item.irons_restrictions.blood_manuscript_desc": "Bruk for å lære Blod trolldom",
+  "item.irons_restrictions.lightning_manuscript": "Lyn Manuskript",
+  "item.irons_restrictions.lightning_manuscript_desc": "Bruk for å lære Lyn trolldom",
+
+  "item.irons_restrictions.manuscript.learn_scroll": "Du lærte ny trolldom: ",
+
+  "item.irons_restrictions.unfinished_manuscript": "Uferdig Manuskript",
+  "item.irons_restrictions.unfinished_manuscript_desc": "Bruk for å ha sjansen til å lære tilfeldig trolldom",
+  "item.irons_restrictions.unfinished_manuscript.full": "Du kan allerede all tilgjengelig trolldom.",
+  "item.irons_restrictions.unfinished_manuscript.fail": "Manuskriptet smuldrer opp til støv...",
+  "item.irons_restrictions.unfinished_manuscript.success": "Du lærte ny trolldom: ",
+
+  "item.irons_restrictions.fragment": "Revet Rull",
+
+  "item.irons_restrictions.common_upgrade": "Vanlig Oppgradering",
+  "item.irons_restrictions.uncommon_upgrade": "Uvanlig Oppgradering",
+  "item.irons_restrictions.rare_upgrade": "Sjelden Oppgradering",
+  "item.irons_restrictions.epic_upgrade": "Episk Oppgradering",
+  "item.irons_restrictions.legendary_upgrade": "Legendarisk Oppgradering",
+  "item.irons_restrictions.upgrade_desc": "Bruk for å kunne bruke Trolldom av denne sjeldenheten",
+  "item.irons_restrictions.upgrade.fail_above": "Du kan allerede bruke trolldom av dette levelet",
+  "item.irons_restrictions.upgrade.fail_below": "Din nåværende sjeldenhet er ikke sterk nok til å oppgradere til denne sjeldenheten",
+
+
+  "item.irons_restrictions.sound_manuscript": "Lyd Manuskript",
+  "item.irons_restrictions.sound_manuscript_desc": "Bruk for å lære Lyd trolldom",
+
+  "item.irons_restrictions.abyssal_manuscript": "Abyssal Manuskript",
+  "item.irons_restrictions.abyssal_manuscript_desc": "Bruk for å lære Abyssal trolldom",
+
+  "item.irons_restrictions.symmetry_manuscript": "Symmetri Manuskript",
+  "item.irons_restrictions.symmetry_manuscript_desc": "Bruk for å lære Symmetri trolldom",
+  "item.irons_restrictions.spirit_manuscript": "Ånd Manuskript",
+  "item.irons_restrictions.spirit_manuscript_desc": "Bruk for å lære Ånd trolldom",
+  "item.irons_restrictions.dune_manuscript": "Sanddyne Manuskript",
+  "item.irons_restrictions.dune_manuscript_desc": "Bruk for å lære Sanddyne trolldom",
+
+  "item.irons_restrictions.wind_manuscript": "Vind Manuskript",
+  "item.irons_restrictions.wind_manuscript_desc": "Bruk for å lære Vind trolldom",
+
+  "item.irons_restrictions.technomancy_manuscript": "Teknomani Manuskript",
+  "item.irons_restrictions.technomancy_manuscript_desc": "Bruk for å lære Teknomani trolldom",
+
+  "item.irons_restrictions.aqua_manuscript": "Vann Manuskript",
+  "item.irons_restrictions.aqua_manuscript_desc": "Bruk for å lære Vann trolldom",
+
+  "item.irons_restrictions.geo_manuscript": "Jord Manuskript",
+  "item.irons_restrictions.geo_manuscript_desc": "Bruk for å lære Jord trolldom",
+
+  "item.irons_restrictions.blade_manuscript": "Blad Manuskript",
+  "item.irons_restrictions.blade_manuscript_desc": "Bruk for å lære Blad trolldom",
+
+
+  "ui.irons_restrictions.cast_error_rarity": "Du har ikke låst opp denne sjeldenheten enda!",
+
+  "itemGroup.irons_restrictions.restrictions_items_tab": "Iron's Restriksjoner Ting"
+}
