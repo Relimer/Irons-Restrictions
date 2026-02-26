@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:upgrade_orb"
+    },
+    {
+      "item": "irons_spellbooks:rare_ink"
+    },
+    {
+      "item": "irons_spellbooks:rare_ink"
+    },
+    {
+      "item": "irons_spellbooks:rare_ink"
+    },
+    {
+      "item": "irons_spellbooks:rare_ink"
+    }
+  ],
+  "result": {
+    "item": "irons_restrictions:rare_upgrade"
+  }
+}
