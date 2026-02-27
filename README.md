@@ -1,3 +1,4 @@
+# This Repository is no longer active, development continued on [Codeberg](https://codeberg.org/NanaCantCode/Irons-Restrictions)
 # This is not the version you are looking for, checkout our branches!
 # Please report bugs in my discord or github, as I may not see messages otherwise
 # Description!
