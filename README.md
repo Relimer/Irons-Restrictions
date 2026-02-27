@@ -1,3 +1,4 @@
+# This Repository is no longer active, development continued on [Codeberg](https://codeberg.org/NanaCantCode/Irons-Restrictions)
 # Please report bugs in my discord or github, as I may not see messages otherwise
 # Description!
 _This is a pretty small mod I developed to fill a modding gap that I personally thought was missing, but I'm really excited to share it with you_
